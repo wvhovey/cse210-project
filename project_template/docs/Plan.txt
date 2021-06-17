@@ -1,0 +1,48 @@
+PROGRAM
+----------
+The program we are going to create is a dodging game 
+game where the user has control over a fat guy
+and there are vertical scrolling healthy and unhealthy 
+that the guy can choose to either dodge or eat. If user 
+eats unhealthy food he grows and if he eats healthy food he 
+shrinks. There is a countdown timer where the user wins when
+the timer hits 0.
+
+TECHNOLOGY
+----------
+We are going to use Python, the Arcade Library and sprites 
+potentially using the kenney.nl library.
+
+FEATURES
+----------
+(2) Main Scene
+-(2) Play button
+-(3) Help button
+
+(1) Game Scene
+-(1) User-controlled fat guy
+-(1) Different foods
+-(1) Collision detection
+-(2) Timer
+-(2) Weight display
+-(2) Sound effects
+
+(3) Pause Button
+-(3) Help text
+-(3) User controls
+
+(2) Win Scene
+-(2) Announcement
+-(3) Muscle dude animation
+
+(2) Lose Scene
+-(2) Announcement
+-(2) Restart button
+-(3) Tombstone animation
+
+TIMELINE
+----------
+By the end of the first week we will have an Alpha Release. 
+By the end of the second week we will have a Beta Release. 
+By the end of the third week we will have a Release Candidate. 
+By the end of the fourth week we will have a Stable Release.
