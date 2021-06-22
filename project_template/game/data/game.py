@@ -51,11 +51,11 @@ class game(arcade.Window):
         self.lives = 3
 
         # Sounds
-        self.laser_sound = arcade.load_sound(":resources:sounds/hurt5.wav")
-        self.hit_sound1 = arcade.load_sound(":resources:sounds/explosion1.wav")
-        self.hit_sound2 = arcade.load_sound(":resources:sounds/explosion2.wav")
-        self.hit_sound3 = arcade.load_sound(":resources:sounds/hit1.wav")
-        self.hit_sound4 = arcade.load_sound(":resources:sounds/hit2.wav")
+        self.laser_sound = arcade.load_sound("../assets/sounds/laser1.ogg")
+        self.hit_sound1 = arcade.load_sound("../assets/sounds/laser1.ogg")
+        self.hit_sound2 = arcade.load_sound("../assets/sounds/laser1.ogg")
+        self.hit_sound3 = arcade.load_sound("../assets/sounds/laser1.ogg")
+        self.hit_sound4 = arcade.load_sound("../assets/sounds/laser1.ogg")
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -71,24 +71,24 @@ class game(arcade.Window):
 
         # Set up the player
         self.score = 0
-        self.player_sprite = ShipSprite(":resources:images/space_shooter/playerShip1_orange.png", constants.SCALE)
+        self.player_sprite = ShipSprite("../assets/images/man.png", constants.SCALE)
         self.player_sprite_list.append(self.player_sprite)
         self.lives = 3
 
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            life = arcade.Sprite(":resources:images/space_shooter/playerLife1_orange.png", constants.SCALE)
+            life = arcade.Sprite("../assets/images/man.png", constants.SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
             self.ship_life_list.append(life)
 
         # Make the asteroids
-        image_list = (":resources:images/space_shooter/meteorGrey_big1.png",
-                      ":resources:images/space_shooter/meteorGrey_big2.png",
-                      ":resources:images/space_shooter/meteorGrey_big3.png",
-                      ":resources:images/space_shooter/meteorGrey_big4.png")
+        image_list = ("../assets/images/meteorGrey_big1.png",
+                      "../assets/images/meteorGrey_big2.png",
+                      "../assets/images/meteorGrey_big3.png",
+                      "../assets/images/meteorGrey_big4.png")
         for i in range(constants.STARTING_ASTEROID_COUNT):
             image_no = random.randrange(4)
             enemy_sprite = AsteroidSprite(image_list[image_no], constants.SCALE)
@@ -129,7 +129,7 @@ class game(arcade.Window):
         """ Called whenever a key is pressed. """
         # Shoot if the player hit the space bar and we aren't respawning.
         if not self.player_sprite.respawning and symbol == arcade.key.SPACE:
-            bullet_sprite = TurningSprite(":resources:images/space_shooter/laserBlue01.png", constants.SCALE)
+            bullet_sprite = TurningSprite("../assets/images/laserBlue01.png", constants.SCALE)
             bullet_sprite.guid = "Bullet"
 
             bullet_speed = 13
@@ -152,9 +152,9 @@ class game(arcade.Window):
         elif symbol == arcade.key.RIGHT:
             self.player_sprite.change_angle = -3
         elif symbol == arcade.key.UP:
-            self.player_sprite.thrust = 0.15
+            self.player_sprite.speed = 4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
         elif symbol == arcade.key.DOWN:
-            self.player_sprite.thrust = -.2
+            self.player_sprite.speed = -4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
 
     def on_key_release(self, symbol, modifiers):
         """ Called whenever a key is released. """
@@ -163,9 +163,9 @@ class game(arcade.Window):
         elif symbol == arcade.key.RIGHT:
             self.player_sprite.change_angle = 0
         elif symbol == arcade.key.UP:
-            self.player_sprite.thrust = 0
+            self.player_sprite.speed = 0 # changed so that speed is directly impacted used to be thrust (instant start and stop)
         elif symbol == arcade.key.DOWN:
-            self.player_sprite.thrust = 0
+            self.player_sprite.speed = 0  # changed so that speed is directly impacted used to be thrust (instant start and stop)
 
     def split_asteroid(self, asteroid: AsteroidSprite):
         """ Split an asteroid into chunks. """
@@ -176,8 +176,8 @@ class game(arcade.Window):
         if asteroid.size == 4:
             for i in range(3):
                 image_no = random.randrange(2)
-                image_list = [":resources:images/space_shooter/meteorGrey_med1.png",
-                              ":resources:images/space_shooter/meteorGrey_med2.png"]
+                image_list = ["../assets/images/meteorGrey_med1.png",
+                              "../assets/images/meteorGrey_med2.png"]
 
                 enemy_sprite = AsteroidSprite(image_list[image_no],
                                               constants.SCALE * 1.5)
@@ -197,8 +197,8 @@ class game(arcade.Window):
         elif asteroid.size == 3:
             for i in range(3):
                 image_no = random.randrange(2)
-                image_list = [":resources:images/space_shooter/meteorGrey_small1.png",
-                              ":resources:images/space_shooter/meteorGrey_small2.png"]
+                image_list = ["../assets/images/meteorGrey_small1.png",
+                              "../assets/images/meteorGrey_small2.png"]
 
                 enemy_sprite = AsteroidSprite(image_list[image_no],
                                               constants.SCALE * 1.5)
@@ -218,8 +218,8 @@ class game(arcade.Window):
         elif asteroid.size == 2:
             for i in range(3):
                 image_no = random.randrange(2)
-                image_list = [":resources:images/space_shooter/meteorGrey_tiny1.png",
-                              ":resources:images/space_shooter/meteorGrey_tiny2.png"]
+                image_list = ["../assets/images/meteorGrey_tiny1.png",
+                              "../assets/images/meteorGrey_tiny2.png"]
 
                 enemy_sprite = AsteroidSprite(image_list[image_no],
                                               constants.SCALE * 1.5)
