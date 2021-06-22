@@ -19,7 +19,7 @@ class ShipSprite(arcade.Sprite):
         self.thrust = 0
         self.speed = 0
         self.max_speed = 4
-        self.drag = 0.05
+        self.drag = 0 # changed to 0 because humans don't have drag (used to be 0.05)
         self.respawning = 0
 
         # Mark that we are respawning.
