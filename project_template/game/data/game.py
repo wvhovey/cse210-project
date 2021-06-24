@@ -1,5 +1,5 @@
 """
-Asteroid Smasher
+food eater
 
 Shoot space rocks in this demo program created with
 Python and the Arcade library.
@@ -7,7 +7,7 @@ Python and the Arcade library.
 Artwork from http://kenney.nl
 
 If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.asteroid_smasher
+python -m arcade.examples.food_smasher
 """
 import random
 import math
@@ -16,8 +16,8 @@ import os
 
 from typing import cast
 from data import constants
-from data.asteroid_sprite import AsteroidSprite
-from data.ship_sprite import ShipSprite
+from data.food_sprite import FoodSprite
+from data.player_sprite import PlayerSprite
 from data.turning_sprite import TurningSprite
 
 
@@ -41,9 +41,9 @@ class game(arcade.Window):
 
         # Sprite lists
         self.player_sprite_list = arcade.SpriteList()
-        self.asteroid_list = arcade.SpriteList()
+        self.food_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
-        self.ship_life_list = arcade.SpriteList()
+        self.player_life_list = arcade.SpriteList()
 
         # Set up the player
         self.score = 0
@@ -65,13 +65,13 @@ class game(arcade.Window):
 
         # Sprite lists
         self.player_sprite_list = arcade.SpriteList()
-        self.asteroid_list = arcade.SpriteList()
+        self.food_list = arcade.SpriteList()
         self.bullet_list = arcade.SpriteList()
-        self.ship_life_list = arcade.SpriteList()
+        self.player_life_list = arcade.SpriteList()
 
         # Set up the player
         self.score = 0
-        self.player_sprite = ShipSprite("../assets/images/man.png", constants.SCALE)
+        self.player_sprite = PlayerSprite("../assets/images/man.png", constants.SCALE)
         self.player_sprite_list.append(self.player_sprite)
         self.lives = 3
 
@@ -82,27 +82,27 @@ class game(arcade.Window):
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
-            self.ship_life_list.append(life)
+            self.player_life_list.append(life)
 
-        # Make the asteroids
-        image_list = ("../assets/images/meteorGrey_big1.png",
-                      "../assets/images/meteorGrey_big2.png",
-                      "../assets/images/meteorGrey_big3.png",
-                      "../assets/images/meteorGrey_big4.png")
-        for i in range(constants.STARTING_ASTEROID_COUNT):
+        # Make the foods
+        image_list = ("../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png")
+        for i in range(constants.STARTING_food_COUNT):
             image_no = random.randrange(4)
-            enemy_sprite = AsteroidSprite(image_list[image_no], constants.SCALE)
-            enemy_sprite.guid = "Asteroid"
+            food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
+            food_sprite.guid = "food"
 
-            enemy_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, constants.TOP_LIMIT)
-            enemy_sprite.center_x = random.randrange(constants.LEFT_LIMIT, constants.RIGHT_LIMIT)
+            food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, constants.TOP_LIMIT)
+            food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, constants.RIGHT_LIMIT)
 
-            enemy_sprite.change_x = random.random() * 2 - 1
-            enemy_sprite.change_y = random.random() * 2 - 1
+            food_sprite.change_x = random.random() * 2 - 1
+            food_sprite.change_y = random.random() * 2 - 1
 
-            enemy_sprite.change_angle = (random.random() - 0.5) * 2
-            enemy_sprite.size = 4
-            self.asteroid_list.append(enemy_sprite)
+            food_sprite.change_angle = (random.random() - 0.5) * 2
+            food_sprite.size = 4
+            self.food_list.append(food_sprite)
 
     def on_draw(self):
         """
@@ -113,8 +113,8 @@ class game(arcade.Window):
         arcade.start_render()
 
         # Draw all the sprites.
-        self.asteroid_list.draw()
-        self.ship_life_list.draw()
+        self.food_list.draw()
+        self.player_life_list.draw()
         self.bullet_list.draw()
         self.player_sprite_list.draw()
 
@@ -122,7 +122,7 @@ class game(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 70, arcade.color.WHITE, 13)
 
-        output = f"Asteroid Count: {len(self.asteroid_list)}"
+        output = f"food Count: {len(self.food_list)}"
         arcade.draw_text(output, 10, 50, arcade.color.WHITE, 13)
 
     def on_key_press(self, symbol, modifiers):
@@ -158,7 +158,7 @@ class game(arcade.Window):
             self.player_sprite.angle = -90
 
         elif symbol == arcade.key.W:
-            self.player_sprite.speed = 4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
+            self.player_sprite.speed = 4 
             self.player_sprite.angle = 0
 
         elif symbol == arcade.key.S:
@@ -176,35 +176,13 @@ class game(arcade.Window):
             self.player_sprite.angle = -90
 
         elif symbol == arcade.key.W:
-            self.player_sprite.speed = 4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
+            self.player_sprite.speed = 4 
             self.player_sprite.angle = 0
 
         elif symbol == arcade.key.S:
             self.player_sprite.speed = 4 
             self.player_sprite.angle = 180
-        # this code will allow player to rotate using ASWD keys
-        # elif symbol == arcade.key.A:
-        #     if self.player_sprite.angle > 90:
-        #         self.player_sprite.change_angle = -3
-        #     if self.player_sprite.angle < 90:
-        #         self.player_sprite.change_angle = 3
-        # elif symbol == arcade.key.D:
-        #     self.player_sprite.change_angle = -3
-        #     if self.player_sprite.angle > -90:
-        #         self.player_sprite.change_angle = -3
-        #     if self.player_sprite.angle < -90:
-        #         self.player_sprite.change_angle = 3
-        # elif symbol == arcade.key.W:
-        #     if self.player_sprite.angle > 0:
-        #         self.player_sprite.change_angle = -3
-        #     if self.player_sprite.angle < 0:
-        #         self.player_sprite.change_angle = 3
-        # elif symbol == arcade.key.S:
-        #     self.player_sprite.change_angle = -3
-        #     if self.player_sprite.angle > 180:
-        #         self.player_sprite.change_angle = -3
-        #     if self.player_sprite.angle < 180:
-        #         self.player_sprite.change_angle = 3
+
 
     def on_key_release(self, symbol, modifiers):
         """ Called whenever a key is released. """
@@ -224,87 +202,79 @@ class game(arcade.Window):
             self.player_sprite.speed = 0 
         elif symbol == arcade.key.S:
             self.player_sprite.speed = 0  
-        # this code will allow player to rotate using ASWD keys 
-        # elif symbol == arcade.key.A:
-        #     self.player_sprite.change_angle = 0
-        # elif symbol == arcade.key.D:
-        #     self.player_sprite.change_angle = 0
-        # elif symbol == arcade.key.W:
-        #     self.player_sprite.change_angle = 0
-        # elif symbol == arcade.key.S:
-        #     self.player_sprite.change_angle = 0
 
 
-    def split_asteroid(self, asteroid: AsteroidSprite):
-        """ Split an asteroid into chunks. """
-        x = asteroid.center_x
-        y = asteroid.center_y
+
+    def split_food(self, food: FoodSprite):
+        """ Split an food into chunks. """
+        x = food.center_x
+        y = food.center_y
         self.score += 1
 
-        if asteroid.size == 4:
+        if food.size == 4:
             for i in range(3):
                 image_no = random.randrange(2)
-                image_list = ["../assets/images/meteorGrey_med1.png",
-                              "../assets/images/meteorGrey_med2.png"]
+                image_list = ["../assets/images/cake.png",
+                              "../assets/images/cake.png"]
 
-                enemy_sprite = AsteroidSprite(image_list[image_no],
+                food_sprite = FoodSprite(image_list[image_no],
                                               constants.SCALE * 1.5)
 
-                enemy_sprite.center_y = y
-                enemy_sprite.center_x = x
+                food_sprite.center_y = y
+                food_sprite.center_x = x
 
-                enemy_sprite.change_x = random.random() * 2.5 - 1.25
-                enemy_sprite.change_y = random.random() * 2.5 - 1.25
+                food_sprite.change_x = random.random() * 2.5 - 1.25
+                food_sprite.change_y = random.random() * 2.5 - 1.25
 
-                enemy_sprite.change_angle = (random.random() - 0.5) * 2
-                enemy_sprite.size = 3
+                food_sprite.change_angle = (random.random() - 0.5) * 2
+                food_sprite.size = 3
 
-                self.asteroid_list.append(enemy_sprite)
+                self.food_list.append(food_sprite)
                 self.hit_sound1.play()
 
-        elif asteroid.size == 3:
+        elif food.size == 3:
             for i in range(3):
                 image_no = random.randrange(2)
-                image_list = ["../assets/images/meteorGrey_small1.png",
-                              "../assets/images/meteorGrey_small2.png"]
+                image_list = ["../assets/images/cake.png",
+                              "../assets/images/cake.png"]
 
-                enemy_sprite = AsteroidSprite(image_list[image_no],
+                food_sprite = FoodSprite(image_list[image_no],
                                               constants.SCALE * 1.5)
 
-                enemy_sprite.center_y = y
-                enemy_sprite.center_x = x
+                food_sprite.center_y = y
+                food_sprite.center_x = x
 
-                enemy_sprite.change_x = random.random() * 3 - 1.5
-                enemy_sprite.change_y = random.random() * 3 - 1.5
+                food_sprite.change_x = random.random() * 3 - 1.5
+                food_sprite.change_y = random.random() * 3 - 1.5
 
-                enemy_sprite.change_angle = (random.random() - 0.5) * 2
-                enemy_sprite.size = 2
+                food_sprite.change_angle = (random.random() - 0.5) * 2
+                food_sprite.size = 2
 
-                self.asteroid_list.append(enemy_sprite)
+                self.food_list.append(food_sprite)
                 self.hit_sound2.play()
 
-        elif asteroid.size == 2:
+        elif food.size == 2:
             for i in range(3):
                 image_no = random.randrange(2)
-                image_list = ["../assets/images/meteorGrey_tiny1.png",
-                              "../assets/images/meteorGrey_tiny2.png"]
+                image_list = ["../assets/images/cake.png",
+                              "../assets/images/cake.png"]
 
-                enemy_sprite = AsteroidSprite(image_list[image_no],
+                food_sprite = FoodSprite(image_list[image_no],
                                               constants.SCALE * 1.5)
 
-                enemy_sprite.center_y = y
-                enemy_sprite.center_x = x
+                food_sprite.center_y = y
+                food_sprite.center_x = x
 
-                enemy_sprite.change_x = random.random() * 3.5 - 1.75
-                enemy_sprite.change_y = random.random() * 3.5 - 1.75
+                food_sprite.change_x = random.random() * 3.5 - 1.75
+                food_sprite.change_y = random.random() * 3.5 - 1.75
 
-                enemy_sprite.change_angle = (random.random() - 0.5) * 2
-                enemy_sprite.size = 1
+                food_sprite.change_angle = (random.random() - 0.5) * 2
+                food_sprite.size = 1
 
-                self.asteroid_list.append(enemy_sprite)
+                self.food_list.append(food_sprite)
                 self.hit_sound3.play()
 
-        elif asteroid.size == 1:
+        elif food.size == 1:
             self.hit_sound4.play()
 
     def on_update(self, x):
@@ -313,16 +283,16 @@ class game(arcade.Window):
         self.frame_count += 1
 
         if not self.game_over:
-            self.asteroid_list.update()
+            self.food_list.update()
             self.bullet_list.update()
             self.player_sprite_list.update()
 
             for bullet in self.bullet_list:
-                asteroids = arcade.check_for_collision_with_list(bullet, self.asteroid_list)
+                foods = arcade.check_for_collision_with_list(bullet, self.food_list)
 
-                for asteroid in asteroids:
-                    self.split_asteroid(cast(AsteroidSprite, asteroid))  # expected AsteroidSprite, got Sprite instead
-                    asteroid.remove_from_sprite_lists()
+                for food in foods:
+                    self.split_food(cast(FoodSprite, food))  # expected FoodSprite, got Sprite instead
+                    food.remove_from_sprite_lists()
                     bullet.remove_from_sprite_lists()
 
                 # Remove bullet if it goes off-screen
@@ -337,14 +307,14 @@ class game(arcade.Window):
                     bullet.remove_from_sprite_lists()
 
             if not self.player_sprite.respawning:
-                asteroids = arcade.check_for_collision_with_list(self.player_sprite, self.asteroid_list)
-                if len(asteroids) > 0:
+                foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list)
+                if len(foods) > 0:
                     if self.lives > 0:
                         self.lives -= 1
                         self.player_sprite.respawn()
-                        self.split_asteroid(cast(AsteroidSprite, asteroids[0]))
-                        asteroids[0].remove_from_sprite_lists()
-                        self.ship_life_list.pop().remove_from_sprite_lists()
+                        self.split_food(cast(FoodSprite, foods[0]))
+                        foods[0].remove_from_sprite_lists()
+                        self.player_life_list.pop().remove_from_sprite_lists()
                         print("Crash")
                     else:
                         self.game_over = True

@@ -1,15 +1,15 @@
 from data import constants
 import arcade
 
-class AsteroidSprite(arcade.Sprite):
-    """ Sprite that represents an asteroid. """
+class FoodSprite(arcade.Sprite):
+    """ Sprite that represents an food. """
 
     def __init__(self, image_file_name, SCALE):
         super().__init__(image_file_name, constants.SCALE)
         self.size = 0
 
     def update(self):
-        """ Move the asteroid around. """
+        """ Move the food around. """
         super().update()
         if self.center_x < constants.LEFT_LIMIT:
             self.center_x = constants.RIGHT_LIMIT
