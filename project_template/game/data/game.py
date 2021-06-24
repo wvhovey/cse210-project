@@ -148,20 +148,29 @@ class game(arcade.Window):
             arcade.play_sound(self.laser_sound)
 
         if symbol == arcade.key.LEFT:
-            self.player_sprite.change_angle = 3
+            # self.player_sprite.change_angle = 3
+            self.player_sprite.speed = 4
+            self.player_sprite.angle = 90
+
         elif symbol == arcade.key.RIGHT:
-            self.player_sprite.change_angle = -3
+            # self.player_sprite.change_angle = -3
+            self.player_sprite.speed = 4
+            self.player_sprite.angle = -90
+
         elif symbol == arcade.key.UP:
             self.player_sprite.speed = 4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
+            self.player_sprite.angle = 0
+
         elif symbol == arcade.key.DOWN:
-            self.player_sprite.speed = -4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
+            self.player_sprite.speed = 4 
+            self.player_sprite.angle = 180
 
     def on_key_release(self, symbol, modifiers):
         """ Called whenever a key is released. """
         if symbol == arcade.key.LEFT:
-            self.player_sprite.change_angle = 0
+            self.player_sprite.speed = 0
         elif symbol == arcade.key.RIGHT:
-            self.player_sprite.change_angle = 0
+            self.player_sprite.speed = 0
         elif symbol == arcade.key.UP:
             self.player_sprite.speed = 0 # changed so that speed is directly impacted used to be thrust (instant start and stop)
         elif symbol == arcade.key.DOWN:
