@@ -147,24 +147,41 @@ class game(arcade.Window):
 
             arcade.play_sound(self.laser_sound)
 
-        if symbol == arcade.key.LEFT:
+        if symbol == arcade.key.A:
             # self.player_sprite.change_angle = 3
             self.player_sprite.speed = 4
             self.player_sprite.angle = 90
 
-        elif symbol == arcade.key.RIGHT:
+        elif symbol == arcade.key.D:
             # self.player_sprite.change_angle = -3
             self.player_sprite.speed = 4
             self.player_sprite.angle = -90
 
-        elif symbol == arcade.key.UP:
+        elif symbol == arcade.key.W:
             self.player_sprite.speed = 4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
             self.player_sprite.angle = 0
 
-        elif symbol == arcade.key.DOWN:
+        elif symbol == arcade.key.S:
             self.player_sprite.speed = 4 
             self.player_sprite.angle = 180
         
+        elif symbol == arcade.key.A:
+            # self.player_sprite.change_angle = 3
+            self.player_sprite.speed = 4
+            self.player_sprite.angle = 90
+
+        elif symbol == arcade.key.D:
+            # self.player_sprite.change_angle = -3
+            self.player_sprite.speed = 4
+            self.player_sprite.angle = -90
+
+        elif symbol == arcade.key.W:
+            self.player_sprite.speed = 4 # changed so that speed is directly impacted used to be thrust (instant start and stop)
+            self.player_sprite.angle = 0
+
+        elif symbol == arcade.key.S:
+            self.player_sprite.speed = 4 
+            self.player_sprite.angle = 180
         # this code will allow player to rotate using ASWD keys
         # elif symbol == arcade.key.A:
         #     if self.player_sprite.angle > 90:
@@ -196,10 +213,17 @@ class game(arcade.Window):
         elif symbol == arcade.key.RIGHT:
             self.player_sprite.speed = 0
         elif symbol == arcade.key.UP:
-            self.player_sprite.speed = 0 # changed so that speed is directly impacted used to be thrust (instant start and stop)
+            self.player_sprite.speed = 0 
         elif symbol == arcade.key.DOWN:
-            self.player_sprite.speed = 0  # changed so that speed is directly impacted used to be thrust (instant start and stop)
-
+            self.player_sprite.speed = 0  
+        elif symbol == arcade.key.A:
+            self.player_sprite.speed = 0
+        elif symbol == arcade.key.D:
+            self.player_sprite.speed = 0
+        elif symbol == arcade.key.W:
+            self.player_sprite.speed = 0 
+        elif symbol == arcade.key.S:
+            self.player_sprite.speed = 0  
         # this code will allow player to rotate using ASWD keys 
         # elif symbol == arcade.key.A:
         #     self.player_sprite.change_angle = 0
