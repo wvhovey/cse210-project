@@ -2,24 +2,23 @@ from data import constants
 import arcade
 import math
 
-class ShipSprite(arcade.Sprite):
+class PlayerSprite(arcade.Sprite):
     """
-    Sprite that represents our space ship.
+    Sprite that represents our player.
 
     Derives from arcade.Sprite.
     """
     def __init__(self, filename, SCALE):
-        """ Set up the space ship. """
+        """ Set up the player. """
 
         # Call the parent Sprite constructor
         super().__init__(filename, SCALE)
 
         # Info on where we are going.
         # Angle comes in automatically from the parent class.
-        self.thrust = 0
         self.speed = 0
         self.max_speed = 4
-        self.drag = 0 # changed to 0 because humans don't have drag (used to be 0.05)
+        self.drag = 0 
         self.respawning = 0
 
         # Mark that we are respawning.
@@ -27,7 +26,7 @@ class ShipSprite(arcade.Sprite):
 
     def respawn(self):
         """
-        Called when we die and need to make a new ship.
+        Called when we die and need to make a new player.
         'respawning' is an invulnerability timer.
         """
         # If we are in the middle of respawning, this is non-zero.
@@ -56,7 +55,6 @@ class ShipSprite(arcade.Sprite):
             if self.speed > 0:
                 self.speed = 0
 
-        self.speed += self.thrust
         if self.speed > self.max_speed:
             self.speed = self.max_speed
         if self.speed < -self.max_speed:
@@ -68,7 +66,7 @@ class ShipSprite(arcade.Sprite):
         self.center_x += self.change_x
         self.center_y += self.change_y
 
-        # If the ship goes off-screen, move it to the other side of the window
+        # If the player goes off-screen, move it to the other side of the window
         if self.right < 0:
             self.left = constants.SCREEN_WIDTH
 
