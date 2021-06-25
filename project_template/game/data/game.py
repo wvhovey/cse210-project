@@ -20,6 +20,7 @@ from data.food_sprite import FoodSprite
 from data.player_sprite import PlayerSprite
 from data.turning_sprite import TurningSprite
 from data.pause_menu import Pause_Menu
+from data.end_menu import End_Menu
 
 class Game(arcade.View):
     """ Main application class. """
@@ -62,8 +63,8 @@ class Game(arcade.View):
         self.hit_sound3 = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound4 = arcade.load_sound("../assets/sounds/laser1.ogg")
 
-    def on_show(self):
-        arcade.set_background_color(arcade.color.BLACK)
+        # Set the background color
+        arcade.set_background_color(arcade.color.AMAZON)
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -370,5 +371,8 @@ class Game(arcade.View):
                     else:
                         self.game_over = True
                         print("Game over")
+                        # pass self, the current view, to preserve this view's state
+                        end = End_Menu(self)
+                        self.window.show_view(end)
 
 
