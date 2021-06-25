@@ -3,8 +3,6 @@ import arcade
 from arcade.gui import UIManager
 from data import constants
 
-# NOT IMPLEMENTED
-
 class Instruction_Menu(arcade.View):
     """
     An instruction menu
