@@ -19,14 +19,13 @@ from data import constants
 from data.food_sprite import FoodSprite
 from data.player_sprite import PlayerSprite
 from data.turning_sprite import TurningSprite
+from data.pause_menu import Pause_Menu
 
-
-
-class game(arcade.Window):
+class Game(arcade.View):
     """ Main application class. """
 
     def __init__(self):
-        super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+        super().__init__()
 
         # Set the working directory (where we expect to find files) to the same
         # directory this .py file is in. You can leave this out of your own
@@ -50,12 +49,21 @@ class game(arcade.Window):
         self.player_sprite = None
         self.lives = 3
 
+        # Track the current state of what key is pressed
+        self.left_pressed = False
+        self.right_pressed = False
+        self.up_pressed = False
+        self.down_pressed = False
+
         # Sounds
         self.laser_sound = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound1 = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound2 = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound3 = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound4 = arcade.load_sound("../assets/sounds/laser1.ogg")
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -125,6 +133,8 @@ class game(arcade.Window):
         output = f"food Count: {len(self.food_list)}"
         arcade.draw_text(output, 10, 50, arcade.color.WHITE, 13)
 
+
+
     def on_key_press(self, symbol, modifiers):
         """ Called whenever a key is pressed. """
         # Shoot if the player hit the space bar and we aren't respawning.
@@ -146,63 +156,84 @@ class game(arcade.Window):
             self.bullet_list.append(bullet_sprite)
 
             arcade.play_sound(self.laser_sound)
-
-        if symbol == arcade.key.A:
-            # self.player_sprite.change_angle = 3
-            self.player_sprite.speed = 4
-            self.player_sprite.angle = 90
-
-        elif symbol == arcade.key.D:
-            # self.player_sprite.change_angle = -3
-            self.player_sprite.speed = 4
-            self.player_sprite.angle = -90
-
-        elif symbol == arcade.key.W:
-            self.player_sprite.speed = 4 
-            self.player_sprite.angle = 0
-
-        elif symbol == arcade.key.S:
-            self.player_sprite.speed = 4 
-            self.player_sprite.angle = 180
         
-        elif symbol == arcade.key.A:
-            # self.player_sprite.change_angle = 3
-            self.player_sprite.speed = 4
-            self.player_sprite.angle = 90
+        if symbol == arcade.key.ESCAPE:
+            # pass self, the current view, to preserve this view's state
+            pause = Pause_Menu(self)
+            self.window.show_view(pause)
 
-        elif symbol == arcade.key.D:
-            # self.player_sprite.change_angle = -3
-            self.player_sprite.speed = 4
-            self.player_sprite.angle = -90
-
-        elif symbol == arcade.key.W:
-            self.player_sprite.speed = 4 
-            self.player_sprite.angle = 0
-
+        if symbol == arcade.key.W:
+            self.up_pressed = True
         elif symbol == arcade.key.S:
-            self.player_sprite.speed = 4 
-            self.player_sprite.angle = 180
+            self.down_pressed = True
+        elif symbol == arcade.key.A:
+            self.left_pressed = True
+        elif symbol == arcade.key.D:
+            self.right_pressed = True
+
+        # if symbol == arcade.key.A:
+        #     # self.player_sprite.change_angle = 3
+        #     self.player_sprite.speed = 4
+        #     self.player_sprite.angle = 90
+
+        # elif symbol == arcade.key.D:
+        #     # self.player_sprite.change_angle = -3
+        #     self.player_sprite.speed = 4
+        #     self.player_sprite.angle = -90
+
+        # elif symbol == arcade.key.W:
+        #     self.player_sprite.speed = 4 
+        #     self.player_sprite.angle = 0
+
+        # elif symbol == arcade.key.S:
+        #     self.player_sprite.speed = 4 
+        #     self.player_sprite.angle = 180
+        
+        # elif symbol == arcade.key.A:
+        #     # self.player_sprite.change_angle = 3
+        #     self.player_sprite.speed = 4
+        #     self.player_sprite.angle = 90
+
+        # elif symbol == arcade.key.D:
+        #     # self.player_sprite.change_angle = -3
+        #     self.player_sprite.speed = 4
+        #     self.player_sprite.angle = -90
+
+        # elif symbol == arcade.key.W:
+        #     self.player_sprite.speed = 4 
+        #     self.player_sprite.angle = 0
+
+        # elif symbol == arcade.key.S:
+        #     self.player_sprite.speed = 4 
+        #     self.player_sprite.angle = 180
 
 
     def on_key_release(self, symbol, modifiers):
         """ Called whenever a key is released. """
-        if symbol == arcade.key.LEFT:
-            self.player_sprite.speed = 0
-        elif symbol == arcade.key.RIGHT:
-            self.player_sprite.speed = 0
-        elif symbol == arcade.key.UP:
-            self.player_sprite.speed = 0 
-        elif symbol == arcade.key.DOWN:
-            self.player_sprite.speed = 0  
-        elif symbol == arcade.key.A:
-            self.player_sprite.speed = 0
-        elif symbol == arcade.key.D:
-            self.player_sprite.speed = 0
-        elif symbol == arcade.key.W:
-            self.player_sprite.speed = 0 
+        # if symbol == arcade.key.LEFT:
+        #     self.player_sprite.speed = 0
+        # elif symbol == arcade.key.RIGHT:
+        #     self.player_sprite.speed = 0
+        # elif symbol == arcade.key.UP:
+        #     self.player_sprite.speed = 0 
+        # elif symbol == arcade.key.DOWN:
+        #     self.player_sprite.speed = 0  
+        # elif symbol == arcade.key.A:
+        #     self.player_sprite.speed = 0
+        # elif symbol == arcade.key.D:
+        #     self.player_sprite.speed = 0
+        # elif symbol == arcade.key.W:
+        #     self.player_sprite.speed = 0 
+        # elif symbol == arcade.key.S:
+        #     self.player_sprite.speed = 0  
+        if symbol == arcade.key.W:
+            self.up_pressed = False
         elif symbol == arcade.key.S:
-            self.player_sprite.speed = 0  
-
+            self.down_pressed = False
+        elif symbol == arcade.key.A:
+            self.left_pressed = False
+        elif symbol == arcade.key.D:
+            self.right_pressed = False
 
 
     def split_food(self, food: FoodSprite):
@@ -287,6 +318,8 @@ class game(arcade.Window):
             self.bullet_list.update()
             self.player_sprite_list.update()
 
+
+
             for bullet in self.bullet_list:
                 foods = arcade.check_for_collision_with_list(bullet, self.food_list)
 
@@ -306,7 +339,25 @@ class game(arcade.Window):
                 if bullet.center_y > constants.SCREEN_HEIGHT + size:
                     bullet.remove_from_sprite_lists()
 
-            if not self.player_sprite.respawning:
+            # if not self.player_sprite.respawning:
+                            # Calculate speed based on the keys pressed
+            self.player_sprite.change_x = 0
+            self.player_sprite.change_y = 0
+
+
+            if self.up_pressed and not self.down_pressed:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED
+            elif self.down_pressed and not self.up_pressed:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED
+            if self.left_pressed and not self.right_pressed:
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED
+            elif self.right_pressed and not self.left_pressed:
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED
+
+            # Call update to move the sprite
+            # If using a physics engine, call update player to rely on physics engine
+            # for movement, and call physics engine here.
+                self.player_sprite_list.update()
                 foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list)
                 if len(foods) > 0:
                     if self.lives > 0:

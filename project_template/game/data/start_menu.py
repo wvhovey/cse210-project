@@ -1,19 +1,14 @@
 import random
 import arcade
 from arcade.gui import UIManager
+from data.game import Game
+from data.instruction_menu import Instruction_Menu
 
-# --- Constants ---
-SPRITE_SCALING_PLAYER = 0.5
-SPRITE_SCALING_COIN = .25
-COIN_COUNT = 50
-
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Implement Views Example"
 
 class Start_Menu(arcade.View):
     """
-    Main view. Really the only view in this example. """
+    Starting view when the program begins
+    """
 
     def __init__(self):
         super().__init__()
@@ -29,7 +24,7 @@ class Start_Menu(arcade.View):
     def on_show_view(self):
         """ Called once when view is activated. """
         self.setup()
-        arcade.set_background_color(arcade.color.LIGHT_BLUE)
+        arcade.set_background_color(arcade.color.BLACK)
 
     def setup(self):
         """ Set up this view. """
@@ -49,22 +44,22 @@ class Start_Menu(arcade.View):
 
         # Creates the buttons.
         self.button2 = arcade.gui.UIImageButton(
-            center_x = middle,
-            center_y = y_slot * 1,
-            normal_texture = button_normal,
-            hover_texture = hovered_texture,
-            press_texture = pressed_texture,
-            text = 'Instructions'
+            center_x=middle,
+            center_y=y_slot * 1,
+            normal_texture=button_normal,
+            hover_texture=hovered_texture,
+            press_texture=pressed_texture,
+            text='New Game'
         )
         self.ui_manager.add_ui_element(self.button2)
 
         self.button1 = arcade.gui.UIImageButton(
-            center_x = middle,
-            center_y = y_slot * 2,
-            normal_texture = button_normal,
-            hover_texture = hovered_texture,
-            press_texture = pressed_texture,
-            text = 'New Game'
+            center_x=middle,
+            center_y=y_slot * 2,
+            normal_texture=button_normal,
+            hover_texture=hovered_texture,
+            press_texture=pressed_texture,
+            text='Instructions'
         )
         self.ui_manager.add_ui_element(self.button1)
 
@@ -72,23 +67,12 @@ class Start_Menu(arcade.View):
         self.button2.on_click = self.on_button_click2
 
     def on_button_click1(self):
-        print("New Game")
-        # self.ui_manager.purge_ui_elements()
-        # game = GameView()
-        # self.window.show_view(game)
-    
+        self.ui_manager.purge_ui_elements()
+        instruction = Instruction_Menu(self)
+        self.window.show_view(instruction)
+
     def on_button_click2(self):
-        # self.ui_manager.purge_ui_elements()
-        print("Instructions")
-
-
-def main():
-    """ Main method """
-
-    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    start_view = Start_Menu()
-    window.show_view(start_view)
-    arcade.run()
-
-if __name__ == "__main__":
-    main()
+        self.ui_manager.purge_ui_elements()
+        game = Game()
+        game.start_new_game()
+        self.window.show_view(game)
