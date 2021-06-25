@@ -29,7 +29,7 @@ class Start_Menu(arcade.View):
     def on_show_view(self):
         """ Called once when view is activated. """
         self.setup()
-        arcade.set_background_color(arcade.color.DARK_BLUE)
+        arcade.set_background_color(arcade.color.LIGHT_BLUE)
 
     def setup(self):
         """ Set up this view. """
@@ -54,7 +54,7 @@ class Start_Menu(arcade.View):
             normal_texture = button_normal,
             hover_texture = hovered_texture,
             press_texture = pressed_texture,
-            text = 'New Game'
+            text = 'Instructions'
         )
         self.ui_manager.add_ui_element(self.button2)
 
@@ -64,7 +64,7 @@ class Start_Menu(arcade.View):
             normal_texture = button_normal,
             hover_texture = hovered_texture,
             press_texture = pressed_texture,
-            text = 'Instructions'
+            text = 'New Game'
         )
         self.ui_manager.add_ui_element(self.button1)
 
@@ -72,14 +72,14 @@ class Start_Menu(arcade.View):
         self.button2.on_click = self.on_button_click2
 
     def on_button_click1(self):
-        print("Hello")
+        print("New Game")
         # self.ui_manager.purge_ui_elements()
         # game = GameView()
         # self.window.show_view(game)
     
     def on_button_click2(self):
         # self.ui_manager.purge_ui_elements()
-        print("Bye")
+        print("Instructions")
 
 
 def main():
