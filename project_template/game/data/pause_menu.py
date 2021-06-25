@@ -4,9 +4,10 @@ from data import constants
 from arcade.gui import UIManager
 from data.instruction_menu import Instruction_Menu
 
-# NOT IMPLEMENTED
-
 class Pause_Menu(arcade.View):
+    """
+    A pause menu
+    """
     def __init__(self, game_view):
         super().__init__()
         self.game_view = game_view

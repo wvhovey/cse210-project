@@ -6,7 +6,8 @@ from data.instruction_menu import Instruction_Menu
 
 class Start_Menu(arcade.View):
     """
-    Main view. Really the only view in this example. """
+    Starting view when the program begins
+    """
 
     def __init__(self):
         super().__init__()
