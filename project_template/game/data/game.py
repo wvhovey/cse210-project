@@ -19,14 +19,13 @@ from data import constants
 from data.food_sprite import FoodSprite
 from data.player_sprite import PlayerSprite
 from data.turning_sprite import TurningSprite
+from data.pause_menu import Pause_Menu
 
-
-
-class game(arcade.Window):
+class Game(arcade.View):
     """ Main application class. """
 
     def __init__(self):
-        super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+        super().__init__()
 
         # Set the working directory (where we expect to find files) to the same
         # directory this .py file is in. You can leave this out of your own
@@ -56,6 +55,9 @@ class game(arcade.Window):
         self.hit_sound2 = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound3 = arcade.load_sound("../assets/sounds/laser1.ogg")
         self.hit_sound4 = arcade.load_sound("../assets/sounds/laser1.ogg")
+
+    def on_show(self):
+        arcade.set_background_color(arcade.color.BLACK)
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
@@ -146,6 +148,11 @@ class game(arcade.Window):
             self.bullet_list.append(bullet_sprite)
 
             arcade.play_sound(self.laser_sound)
+        
+        if symbol == arcade.key.ESCAPE:
+            # pass self, the current view, to preserve this view's state
+            pause = Pause_Menu(self)
+            self.window.show_view(pause)
 
         if symbol == arcade.key.A:
             # self.player_sprite.change_angle = 3

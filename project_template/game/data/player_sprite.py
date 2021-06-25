@@ -19,7 +19,7 @@ class PlayerSprite(arcade.Sprite):
         self.speed = 0
         self.max_speed = 4
         self.drag = 0 
-        self.respawning = 0
+        self.respawning = False
 
         # Mark that we are respawning.
         self.respawn()
@@ -30,7 +30,7 @@ class PlayerSprite(arcade.Sprite):
         'respawning' is an invulnerability timer.
         """
         # If we are in the middle of respawning, this is non-zero.
-        self.respawning = 1
+        self.respawning = True
         self.center_x = constants.SCREEN_WIDTH / 2
         self.center_y = constants.SCREEN_HEIGHT / 2
         self.angle = 0

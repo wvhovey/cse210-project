@@ -2,9 +2,10 @@ import random
 import arcade
 from arcade.gui import UIManager
 from data.game import Game
-from data.instruction_menu import Instruction_Menu
 
-class Start_Menu(arcade.View):
+# NOT IMPLEMENTED
+
+class End_Menu(arcade.View):
     """
     Main view. Really the only view in this example. """
 
@@ -65,9 +66,10 @@ class Start_Menu(arcade.View):
         self.button2.on_click = self.on_button_click2
 
     def on_button_click1(self):
-        self.ui_manager.purge_ui_elements()
-        instruction = Instruction_Menu(self)
-        self.window.show_view(instruction)
+        print("Hello")
+        # self.ui_manager.purge_ui_elements()
+        # game = GameView()
+        # self.window.show_view(game)
     
     def on_button_click2(self):
         self.ui_manager.purge_ui_elements()
