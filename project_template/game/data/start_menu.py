@@ -11,7 +11,6 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Implement Views Example"
 
-
 class Start_Menu(arcade.View):
     """
     Main view. Really the only view in this example. """
@@ -20,6 +19,7 @@ class Start_Menu(arcade.View):
         super().__init__()
 
         self.ui_manager = UIManager()
+        self.view = None
 
     def on_draw(self):
         """ Draw this view. GUI elements are automatically drawn. """
@@ -48,7 +48,7 @@ class Start_Menu(arcade.View):
             ':resources:gui_basic_assets/red_button_press.png')
 
         # Creates the buttons.
-        button1 = arcade.gui.UIImageButton(
+        self.button2 = arcade.gui.UIImageButton(
             center_x = middle,
             center_y = y_slot * 1,
             normal_texture = button_normal,
@@ -56,9 +56,9 @@ class Start_Menu(arcade.View):
             press_texture = pressed_texture,
             text = 'New Game'
         )
-        self.ui_manager.add_ui_element(button1)
+        self.ui_manager.add_ui_element(self.button2)
 
-        button2 = arcade.gui.UIImageButton(
+        self.button1 = arcade.gui.UIImageButton(
             center_x = middle,
             center_y = y_slot * 2,
             normal_texture = button_normal,
@@ -66,7 +66,21 @@ class Start_Menu(arcade.View):
             press_texture = pressed_texture,
             text = 'Instructions'
         )
-        self.ui_manager.add_ui_element(button2)
+        self.ui_manager.add_ui_element(self.button1)
+
+        self.button1.on_click = self.on_button_click1
+        self.button2.on_click = self.on_button_click2
+
+    def on_button_click1(self):
+        print("Hello")
+        # self.ui_manager.purge_ui_elements()
+        # game = GameView()
+        # self.window.show_view(game)
+    
+    def on_button_click2(self):
+        # self.ui_manager.purge_ui_elements()
+        print("Bye")
+
 
 def main():
     """ Main method """
