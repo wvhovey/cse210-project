@@ -70,6 +70,10 @@ class Game(arcade.View):
         self.frame_count = 0
         self.game_over = False
 
+        self.left_pressed = False
+        self.right_pressed = False
+        self.up_pressed = False
+        self.down_pressed = False
         # Sprite lists
         self.player_sprite_list = arcade.SpriteList()
         self.food_list = arcade.SpriteList()
