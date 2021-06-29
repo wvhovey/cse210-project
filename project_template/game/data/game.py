@@ -1,13 +1,11 @@
 """
 food eater
 
-Shoot space rocks in this demo program created with
+Shoot cake in this demo program created with
 Python and the Arcade library.
 
 Artwork from http://kenney.nl
 
-If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.food_smasher
 """
 import random
 import math
