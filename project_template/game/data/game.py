@@ -358,21 +358,21 @@ class Game(arcade.View):
             # Call update to move the sprite
             # If using a physics engine, call update player to rely on physics engine
             # for movement, and call physics engine here.
-                self.player_sprite_list.update()
-                foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list)
-                if len(foods) > 0:
-                    if self.lives > 0:
-                        self.lives -= 1
-                        self.player_sprite.respawn()
-                        self.split_food(cast(FoodSprite, foods[0]))
-                        foods[0].remove_from_sprite_lists()
-                        self.player_life_list.pop().remove_from_sprite_lists()
-                        print("Crash")
-                    else:
-                        self.game_over = True
-                        print("Game over")
-                        # pass self, the current view, to preserve this view's state
-                        end = End_Menu(self)
-                        self.window.show_view(end)
+            self.player_sprite_list.update()
+            foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list)
+            if len(foods) > 0:
+                if self.lives > 0:
+                    self.lives -= 1
+                    self.player_sprite.respawn()
+                    self.split_food(cast(FoodSprite, foods[0]))
+                    foods[0].remove_from_sprite_lists()
+                    self.player_life_list.pop().remove_from_sprite_lists()
+                    print("Crash")
+                else:
+                    self.game_over = True
+                    print("Game over")
+                    # pass self, the current view, to preserve this view's state
+                    end = End_Menu(self)
+                    self.window.show_view(end)
 
 
