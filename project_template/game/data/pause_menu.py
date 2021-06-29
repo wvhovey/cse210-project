@@ -14,7 +14,7 @@ class Pause_Menu(arcade.View):
         self.ui_manager = UIManager()
 
     def on_show(self):
-        arcade.set_background_color(arcade.color.ORANGE)
+        arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
         arcade.start_render()
@@ -30,22 +30,22 @@ class Pause_Menu(arcade.View):
                                           right=player_sprite.right,
                                           top=player_sprite.top,
                                           bottom=player_sprite.bottom,
-                                          color=arcade.color.ORANGE + (200,))
+                                          color=arcade.color.BLACK + (200,))
 
         arcade.draw_text("PAUSED", constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2+50,
-                         arcade.color.BLACK, font_size=50, anchor_x="center")
+                         arcade.color.WHITE, font_size=50, anchor_x="center")
 
         # Show tip to return or reset
         arcade.draw_text("Press Esc. to return",
                          constants.SCREEN_WIDTH/2,
                          constants.SCREEN_HEIGHT/2,
-                         arcade.color.BLACK,
+                         arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
         arcade.draw_text("Press Enter to view instructions",
                          constants.SCREEN_WIDTH/2,
                          constants.SCREEN_HEIGHT/2-30,
-                         arcade.color.BLACK,
+                         arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
 

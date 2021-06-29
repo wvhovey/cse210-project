@@ -62,7 +62,7 @@ class Game(arcade.View):
         self.hit_sound4 = arcade.load_sound("../assets/sounds/laser1.ogg")
 
         # Set the background color
-        arcade.set_background_color(arcade.color.AMAZON)
+        arcade.set_background_color(arcade.color.BLACK)
 
     def start_new_game(self):
         """ Set up the game and initialize the variables. """
