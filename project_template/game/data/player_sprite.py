@@ -48,6 +48,7 @@ class PlayerSprite(arcade.Sprite):
             if self.respawning > 250:
                 self.respawning = 0
                 self.alpha = 255
+
         # if self.speed > 0:
         #     self.speed -= self.drag
         #     if self.speed < 0:
