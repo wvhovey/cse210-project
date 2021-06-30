@@ -332,8 +332,8 @@ class Game(arcade.View):
                     for player in self.player_sprite_list:
                         # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
                         # player.set_texture(1) # This can be used to change image of player after being hit
-                        player.width = player.width - 10 # increases player size 
-                        player.height = player.height - 10 # increases player size
+                        player.width = player.width / 1.5 # increases player size 
+                        player.height = player.height / 1.5 # increases player size
                 if self.lives == 0:
 
                     self.game_over = True
@@ -354,8 +354,8 @@ class Game(arcade.View):
                     for player in self.player_sprite_list:
                         # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
                         # player.set_texture(1) # This can be used to change image of player after being hit
-                        player.width = player.width + 30 # increases player size 
-                        player.height = player.height + 30 # increases player size
+                        player.width = player.width * 1.5 # increases player size 
+                        player.height = player.height * 1.5 # increases player size
                 if self.lives == 0:
 
                     self.game_over = True
