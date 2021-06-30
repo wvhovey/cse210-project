@@ -70,6 +70,8 @@ class Game(arcade.View):
         self.frame_count = 0
         self.game_over = False
 
+        arcade.set_background_color(arcade.color.AMAZON)
+
         self.left_pressed = False
         self.right_pressed = False
         self.up_pressed = False
@@ -99,9 +101,16 @@ class Game(arcade.View):
         image_list = ("../assets/images/cake.png",
                       "../assets/images/cake.png",
                       "../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png",
+                      "../assets/images/cake.png",
                       "../assets/images/cake.png")
+
         for i in range(constants.STARTING_food_COUNT):
-            image_no = random.randrange(4)
+            image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
             food_sprite.guid = "food"
 
@@ -140,25 +149,6 @@ class Game(arcade.View):
 
     def on_key_press(self, symbol, modifiers):
         """ Called whenever a key is pressed. """
-        # Shoot if the player hit the space bar and we aren't respawning.
-        if not self.player_sprite.respawning and symbol == arcade.key.SPACE:
-            bullet_sprite = TurningSprite("../assets/images/laserBlue01.png", constants.SCALE)
-            bullet_sprite.guid = "Bullet"
-
-            bullet_speed = 13
-            bullet_sprite.change_y = \
-                math.cos(math.radians(self.player_sprite.angle)) * bullet_speed
-            bullet_sprite.change_x = \
-                -math.sin(math.radians(self.player_sprite.angle)) \
-                * bullet_speed
-
-            bullet_sprite.center_x = self.player_sprite.center_x
-            bullet_sprite.center_y = self.player_sprite.center_y
-            bullet_sprite.update()
-
-            self.bullet_list.append(bullet_sprite)
-
-            arcade.play_sound(self.laser_sound)
         
         if symbol == arcade.key.ESCAPE:
             # pass self, the current view, to preserve this view's state
@@ -238,79 +228,6 @@ class Game(arcade.View):
         elif symbol == arcade.key.D:
             self.right_pressed = False
 
-
-    def split_food(self, food: FoodSprite):
-        """ Split an food into chunks. """
-        x = food.center_x
-        y = food.center_y
-        self.score += 1
-
-        if food.size == 4:
-            for i in range(3):
-                image_no = random.randrange(2)
-                image_list = ["../assets/images/cake.png",
-                              "../assets/images/cake.png"]
-
-                food_sprite = FoodSprite(image_list[image_no],
-                                              constants.SCALE * 1.5)
-
-                food_sprite.center_y = y
-                food_sprite.center_x = x
-
-                food_sprite.change_x = random.random() * 2.5 - 1.25
-                food_sprite.change_y = random.random() * 2.5 - 1.25
-
-                food_sprite.change_angle = (random.random() - 0.5) * 2
-                food_sprite.size = 3
-
-                self.food_list.append(food_sprite)
-                self.hit_sound1.play()
-
-        elif food.size == 3:
-            for i in range(3):
-                image_no = random.randrange(2)
-                image_list = ["../assets/images/cake.png",
-                              "../assets/images/cake.png"]
-
-                food_sprite = FoodSprite(image_list[image_no],
-                                              constants.SCALE * 1.5)
-
-                food_sprite.center_y = y
-                food_sprite.center_x = x
-
-                food_sprite.change_x = random.random() * 3 - 1.5
-                food_sprite.change_y = random.random() * 3 - 1.5
-
-                food_sprite.change_angle = (random.random() - 0.5) * 2
-                food_sprite.size = 2
-
-                self.food_list.append(food_sprite)
-                self.hit_sound2.play()
-
-        elif food.size == 2:
-            for i in range(3):
-                image_no = random.randrange(2)
-                image_list = ["../assets/images/cake.png",
-                              "../assets/images/cake.png"]
-
-                food_sprite = FoodSprite(image_list[image_no],
-                                              constants.SCALE * 1.5)
-
-                food_sprite.center_y = y
-                food_sprite.center_x = x
-
-                food_sprite.change_x = random.random() * 3.5 - 1.75
-                food_sprite.change_y = random.random() * 3.5 - 1.75
-
-                food_sprite.change_angle = (random.random() - 0.5) * 2
-                food_sprite.size = 1
-
-                self.food_list.append(food_sprite)
-                self.hit_sound3.play()
-
-        elif food.size == 1:
-            self.hit_sound4.play()
-
     def on_update(self, x):
         """ Move everything """
 
@@ -323,24 +240,12 @@ class Game(arcade.View):
 
 
 
-            for bullet in self.bullet_list:
-                foods = arcade.check_for_collision_with_list(bullet, self.food_list)
+            # for bullet in self.bullet_list:
+            #     foods = arcade.check_for_collision_with_list(bullet, self.food_list)
 
-                for food in foods:
-                    self.split_food(cast(FoodSprite, food))  # expected FoodSprite, got Sprite instead
-                    food.remove_from_sprite_lists()
-                    bullet.remove_from_sprite_lists()
+            #     for food in foods:
+            #         food.remove_from_sprite_lists()
 
-                # Remove bullet if it goes off-screen
-                size = max(bullet.width, bullet.height)
-                if bullet.center_x < 0 - size:
-                    bullet.remove_from_sprite_lists()
-                if bullet.center_x > constants.SCREEN_WIDTH + size:
-                    bullet.remove_from_sprite_lists()
-                if bullet.center_y < 0 - size:
-                    bullet.remove_from_sprite_lists()
-                if bullet.center_y > constants.SCREEN_HEIGHT + size:
-                    bullet.remove_from_sprite_lists()
 
             # if not self.player_sprite.respawning:
                             # Calculate speed based on the keys pressed
@@ -372,12 +277,13 @@ class Game(arcade.View):
                     self.player_sprite_list.append(self.player_sprite)
                     self.lives -= 1
                     self.player_sprite.respawn()
-                    self.split_food(cast(FoodSprite, foods[0]))
-                    foods[0].remove_from_sprite_lists()
+                    # foods[0].remove_from_sprite_lists()
                     self.player_life_list.pop().remove_from_sprite_lists()
+                    self.hit_sound3.play()
                     print("Crash")
                 else:
                     self.game_over = True
+                    self.player_scale = 0.5
                     print("Game over")
                     # pass self, the current view, to preserve this view's state
                     end = End_Menu(self)
