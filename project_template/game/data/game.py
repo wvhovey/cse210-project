@@ -34,7 +34,7 @@ class Game(arcade.View):
         os.chdir(file_path)
 
         self.frame_count = 0
-
+        self.player_scale = 0.5
         self.game_over = False
 
         # Sprite lists
@@ -82,7 +82,7 @@ class Game(arcade.View):
 
         # Set up the player
         self.score = 0
-        self.player_sprite = PlayerSprite("../assets/images/man.png", constants.SCALE)
+        self.player_sprite = PlayerSprite("../assets/images/man.png", self.player_scale)
         self.player_sprite_list.append(self.player_sprite)
         self.lives = 3
 
@@ -361,9 +361,15 @@ class Game(arcade.View):
             # If using a physics engine, call update player to rely on physics engine
             # for movement, and call physics engine here.
             self.player_sprite_list.update()
-            foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list)
+            foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list) 
             if len(foods) > 0:
                 if self.lives > 0:
+                    # scale the character, remove current sprite, add sprite with new scale,
+                    # append the new sprite to sprite list. <--- Lines 369 - 372
+                    self.player_scale += 0.2
+                    self.player_sprite_list.remove(self.player_sprite)
+                    self.player_sprite = PlayerSprite("../assets/images/man.png", self.player_scale)
+                    self.player_sprite_list.append(self.player_sprite)
                     self.lives -= 1
                     self.player_sprite.respawn()
                     self.split_food(cast(FoodSprite, foods[0]))
