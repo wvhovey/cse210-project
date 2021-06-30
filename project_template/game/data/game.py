@@ -262,6 +262,9 @@ class Game(arcade.View):
             elif self.right_pressed and not self.left_pressed:
                 self.player_sprite.change_x = constants.MOVEMENT_SPEED
 
+
+            # Code that gives player invincibility after getting hit and respawns in center
+
             # Call update to move the sprite
             # If using a physics engine, call update player to rely on physics engine
             # for movement, and call physics engine here.
@@ -282,6 +285,27 @@ class Game(arcade.View):
                     self.hit_sound3.play()
                     print("Crash")
                 else:
+
+
+            # Code if we want the player to stay in same place after being hit with no invincibility frames
+            # code works by increasing the player's height and width if they're hit
+            # to easily comment between the two do: highlight everything and press Ctrl + ?/ 
+
+            # self.player_sprite_list.update()
+            # foods = arcade.check_for_collision_with_list(self.player_sprite, self.food_list) 
+            # if len(foods) > 0:
+            #     if self.lives > 0:
+            #         self.lives -= 1
+            #         foods[0].remove_from_sprite_lists()
+            #         self.player_life_list.pop().remove_from_sprite_lists()
+            #         print("Crash")
+            #         for player in self.player_sprite_list:
+            #             # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
+            #             # player.set_texture(1) # This can be used to change image of player after being hit
+            #             player.width = player.width + 30 # increases player size 
+            #             player.height = player.height + 30 # increases player size
+            #     else:
+
                     self.game_over = True
                     self.player_scale = 0.5
                     print("Game over")

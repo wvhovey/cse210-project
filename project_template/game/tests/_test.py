@@ -4,6 +4,11 @@ import math
 import pytest
 import os
 
+# import constants 
+
+# def test_constants():
+#     assert constants.SCREEN_WIDTH == 7
+
 # game.py methods
 def test_on_key_press(capsys):
     file_path = os.path.dirname(os.path.abspath(__file__))
