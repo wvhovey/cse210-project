@@ -44,9 +44,9 @@ class Game(arcade.View):
         self.player_life_list = arcade.SpriteList()
 
         # Set up the player
-        self.score = 0
+        self.weight = 250
         self.player_sprite = None
-        self.lives = 3
+        # self.lives = 3
 
         # Track the current state of what key is pressed
         self.left_pressed = False
@@ -70,12 +70,13 @@ class Game(arcade.View):
         self.frame_count = 0
         self.game_over = False
 
-        arcade.set_background_color(arcade.color.AMAZON)
+        arcade.set_background_color(arcade.color.AMAZON) 
 
         self.left_pressed = False
         self.right_pressed = False
         self.up_pressed = False
         self.down_pressed = False
+
         # Sprite lists
         self.player_sprite_list = arcade.SpriteList()
         self.healthy_food_list = arcade.SpriteList()
@@ -84,7 +85,7 @@ class Game(arcade.View):
         self.player_life_list = arcade.SpriteList()
 
         # Set up the player
-        self.score = 0
+        self.weight = 250
         self.player_sprite = PlayerSprite("../assets/images/man.png", self.player_scale)
         self.player_sprite_list.append(self.player_sprite)
         self.lives = 3
@@ -168,7 +169,7 @@ class Game(arcade.View):
         self.player_sprite_list.draw()
 
         # Put the text on the screen.
-        output = f"Score: {self.score}"
+        output = f"Weight: {self.weight}"
         arcade.draw_text(output, 10, 70, arcade.color.WHITE, 13)
 
         output = f"food Count: {len(self.healthy_food_list)}"
@@ -325,7 +326,8 @@ class Game(arcade.View):
             healthy_foods = arcade.check_for_collision_with_list(self.player_sprite, self.healthy_food_list) 
             if len(healthy_foods) > 0:
                 if self.lives > 0:
-                    self.lives += 1
+                    self.weight -= 50
+                    # self.lives += 1
                     healthy_foods[0].remove_from_sprite_lists()
                     # self.player_life_list.pop().remove_from_sprite_lists()
                     print("Crash")
@@ -334,7 +336,7 @@ class Game(arcade.View):
                         # player.set_texture(1) # This can be used to change image of player after being hit
                         player.width = player.width / 1.5 # increases player size 
                         player.height = player.height / 1.5 # increases player size
-                if self.lives == 0:
+                if self.weight <= 100:
 
                     self.game_over = True
                     self.player_scale = 0.5
@@ -347,7 +349,8 @@ class Game(arcade.View):
             unhealthy_foods = arcade.check_for_collision_with_list(self.player_sprite, self.unhealthy_food_list) 
             if len(unhealthy_foods) > 0:
                 if self.lives > 0:
-                    self.lives -= 1
+                    self.weight += 50
+                    # self.lives -= 1
                     unhealthy_foods[0].remove_from_sprite_lists()
                     # self.player_life_list.pop().remove_from_sprite_lists()
                     print("Crash")
@@ -356,7 +359,8 @@ class Game(arcade.View):
                         # player.set_texture(1) # This can be used to change image of player after being hit
                         player.width = player.width * 1.5 # increases player size 
                         player.height = player.height * 1.5 # increases player size
-                if self.lives == 0:
+
+                if self.weight >= 400:
 
                     self.game_over = True
                     self.player_scale = 0.5
