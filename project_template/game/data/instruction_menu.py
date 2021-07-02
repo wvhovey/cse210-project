@@ -56,6 +56,12 @@ class Instruction_Menu(arcade.View):
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
+        arcade.draw_text("Dont go below 100 weight or above 400 weight or you will lose",
+                         constants.SCREEN_WIDTH/2,
+                         constants.SCREEN_HEIGHT/2-150,
+                         arcade.color.WHITE,
+                         font_size=20,
+                         anchor_x="center")
     
     def on_key_press(self, key, _modifiers):
         if key == arcade.key.ESCAPE:   # resume game
