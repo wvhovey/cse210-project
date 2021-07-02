@@ -164,7 +164,7 @@ class Game(arcade.View):
         # Draw all the sprites.
         self.healthy_food_list.draw()
         self.unhealthy_food_list.draw()
-        self.player_life_list.draw()
+        # self.player_life_list.draw()
         self.bullet_list.draw()
         self.player_sprite_list.draw()
 
