@@ -40,13 +40,11 @@ class Game(arcade.View):
         # Sprite lists
         self.player_sprite_list = arcade.SpriteList()
         self.healthy_food_list = arcade.SpriteList()
-        self.bullet_list = arcade.SpriteList()
         self.player_life_list = arcade.SpriteList()
 
         # Set up the player
         self.weight = 250
         self.player_sprite = None
-        # self.lives = 3
 
         # Track the current state of what key is pressed
         self.left_pressed = False
@@ -81,7 +79,6 @@ class Game(arcade.View):
         self.player_sprite_list = arcade.SpriteList()
         self.healthy_food_list = arcade.SpriteList()
         self.unhealthy_food_list = arcade.SpriteList()
-        self.bullet_list = arcade.SpriteList()
         self.player_life_list = arcade.SpriteList()
 
         # Set up the player
@@ -100,6 +97,12 @@ class Game(arcade.View):
             self.player_life_list.append(life)
 
         # Make the unhealthy foods
+        self.create_unhealthy_food(constants.STARTING_food_COUNT)
+
+        # Make the healthy foods
+        self.create_healthy_food(constants.STARTING_food_COUNT)
+
+    def create_unhealthy_food(self, count):
         image_list = ("../assets/images/cake.png",
                       "../assets/images/cake.png",
                       "../assets/images/cake.png",
@@ -110,8 +113,7 @@ class Game(arcade.View):
                       "../assets/images/cake.png",
                       "../assets/images/cake.png",
                       "../assets/images/cake.png")
-
-        for i in range(constants.STARTING_food_COUNT):
+        for i in range(count):
             image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
             food_sprite.guid = "food"
@@ -126,7 +128,7 @@ class Game(arcade.View):
             food_sprite.size = 4
             self.unhealthy_food_list.append(food_sprite)
 
-        # Make the healthy foods
+    def create_healthy_food(self, count):
         image_list = ("../assets/images/salad.png",
                       "../assets/images/salad.png",
                       "../assets/images/salad.png",
@@ -137,8 +139,7 @@ class Game(arcade.View):
                       "../assets/images/salad.png",
                       "../assets/images/salad.png",
                       "../assets/images/salad.png")
-
-        for i in range(constants.STARTING_food_COUNT):
+        for i in range(count):
             image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
             food_sprite.guid = "food"
@@ -164,8 +165,6 @@ class Game(arcade.View):
         # Draw all the sprites.
         self.healthy_food_list.draw()
         self.unhealthy_food_list.draw()
-        # self.player_life_list.draw()
-        self.bullet_list.draw()
         self.player_sprite_list.draw()
 
         # Put the text on the screen.
@@ -194,61 +193,8 @@ class Game(arcade.View):
         elif symbol == arcade.key.D:
             self.right_pressed = True
 
-        # if symbol == arcade.key.A:
-        #     # self.player_sprite.change_angle = 3
-        #     self.player_sprite.speed = 4
-        #     self.player_sprite.angle = 90
-
-        # elif symbol == arcade.key.D:
-        #     # self.player_sprite.change_angle = -3
-        #     self.player_sprite.speed = 4
-        #     self.player_sprite.angle = -90
-
-        # elif symbol == arcade.key.W:
-        #     self.player_sprite.speed = 4 
-        #     self.player_sprite.angle = 0
-
-        # elif symbol == arcade.key.S:
-        #     self.player_sprite.speed = 4 
-        #     self.player_sprite.angle = 180
-        
-        # elif symbol == arcade.key.A:
-        #     # self.player_sprite.change_angle = 3
-        #     self.player_sprite.speed = 4
-        #     self.player_sprite.angle = 90
-
-        # elif symbol == arcade.key.D:
-        #     # self.player_sprite.change_angle = -3
-        #     self.player_sprite.speed = 4
-        #     self.player_sprite.angle = -90
-
-        # elif symbol == arcade.key.W:
-        #     self.player_sprite.speed = 4 
-        #     self.player_sprite.angle = 0
-
-        # elif symbol == arcade.key.S:
-        #     self.player_sprite.speed = 4 
-        #     self.player_sprite.angle = 180
-
-
     def on_key_release(self, symbol, modifiers):
         """ Called whenever a key is released. """
-        # if symbol == arcade.key.LEFT:
-        #     self.player_sprite.speed = 0
-        # elif symbol == arcade.key.RIGHT:
-        #     self.player_sprite.speed = 0
-        # elif symbol == arcade.key.UP:
-        #     self.player_sprite.speed = 0 
-        # elif symbol == arcade.key.DOWN:
-        #     self.player_sprite.speed = 0  
-        # elif symbol == arcade.key.A:
-        #     self.player_sprite.speed = 0
-        # elif symbol == arcade.key.D:
-        #     self.player_sprite.speed = 0
-        # elif symbol == arcade.key.W:
-        #     self.player_sprite.speed = 0 
-        # elif symbol == arcade.key.S:
-        #     self.player_sprite.speed = 0  
         if symbol == arcade.key.W:
             self.up_pressed = False
         elif symbol == arcade.key.S:
@@ -266,17 +212,7 @@ class Game(arcade.View):
         if not self.game_over:
             self.healthy_food_list.update()
             self.unhealthy_food_list.update()
-            self.bullet_list.update()
             self.player_sprite_list.update()
-
-
-
-            # for bullet in self.bullet_list:
-            #     foods = arcade.check_for_collision_with_list(bullet, self.healthy_food_list)
-
-            #     for food in foods:
-            #         food.remove_from_sprite_lists()
-
 
             # if not self.player_sprite.respawning:
                             # Calculate speed based on the keys pressed
@@ -327,10 +263,8 @@ class Game(arcade.View):
             if len(healthy_foods) > 0:
                 if self.lives > 0:
                     self.weight -= 50
-                    # self.lives += 1
                     healthy_foods[0].remove_from_sprite_lists()
-                    # self.player_life_list.pop().remove_from_sprite_lists()
-                    print("Crash")
+                    self.create_healthy_food(1)
                     for player in self.player_sprite_list:
                         # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
                         # player.set_texture(1) # This can be used to change image of player after being hit
@@ -343,17 +277,14 @@ class Game(arcade.View):
                     print("Game over")
                     # pass self, the current view, to preserve this view's state
                     end = End_Menu(self)
-                    self.window.show_view(end)
-
+                    self.window.show_view(end)              
 
             unhealthy_foods = arcade.check_for_collision_with_list(self.player_sprite, self.unhealthy_food_list) 
             if len(unhealthy_foods) > 0:
                 if self.lives > 0:
                     self.weight += 50
-                    # self.lives -= 1
                     unhealthy_foods[0].remove_from_sprite_lists()
-                    # self.player_life_list.pop().remove_from_sprite_lists()
-                    print("Crash")
+                    self.create_unhealthy_food(1)
                     for player in self.player_sprite_list:
                         # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
                         # player.set_texture(1) # This can be used to change image of player after being hit
@@ -368,3 +299,4 @@ class Game(arcade.View):
                     # pass self, the current view, to preserve this view's state
                     end = End_Menu(self)
                     self.window.show_view(end)
+                

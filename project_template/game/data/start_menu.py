@@ -26,7 +26,7 @@ class Start_Menu(arcade.View):
         arcade.set_background_color(arcade.color.BLACK)
 
     def setup(self):
-        """ Set up this view. """
+        """ Sets up the layout of the viewscreen. """
         self.ui_manager.purge_ui_elements()
 
         # Makes variables to place the buttons
@@ -66,11 +66,13 @@ class Start_Menu(arcade.View):
         self.button2.on_click = self.on_button_click2
 
     def on_button_click1(self):
+        """ Listens for a button click. """
         self.ui_manager.purge_ui_elements()
         instruction = Instruction_Menu(self)
         self.window.show_view(instruction)
     
     def on_button_click2(self):
+        """ Listens for a button click. """
         self.ui_manager.purge_ui_elements()
         game = Game()
         game.start_new_game()

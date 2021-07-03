@@ -13,9 +13,11 @@ class Instruction_Menu(arcade.View):
         self.instruction_view = pause_view
 
     def on_show(self):
+        """ Called once when view is activated. """
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
+        """ Set up this view. """
         arcade.start_render()
 
         arcade.draw_text("INSTRUCTIONS", constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2+140,
@@ -64,5 +66,6 @@ class Instruction_Menu(arcade.View):
                          anchor_x="center")
     
     def on_key_press(self, key, _modifiers):
+        """ Listens for a key press. """
         if key == arcade.key.ESCAPE:   # resume game
             self.window.show_view(self.instruction_view)
