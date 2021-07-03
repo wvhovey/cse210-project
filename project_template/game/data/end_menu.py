@@ -39,7 +39,7 @@ class End_Menu(arcade.View):
     def on_key_press(self, key, _modifiers):
         """ Listens for a key press. """
         if key == arcade.key.ESCAPE:   # end game
-            self.window.close_window()
+            self.window.close()
         elif key == arcade.key.ENTER:  # restart game
             self.game_view.start_new_game()
             self.window.show_view(self.game_view)
