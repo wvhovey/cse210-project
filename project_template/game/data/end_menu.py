@@ -23,7 +23,7 @@ class End_Menu(arcade.View):
                          arcade.color.WHITE, font_size=50, anchor_x="center")
 
         # Show tip to return or reset
-        arcade.draw_text("Press Esc. to quit (doesn't currently work)",
+        arcade.draw_text("Press Esc. to quit",
                          constants.SCREEN_WIDTH/2,
                          constants.SCREEN_HEIGHT/2,
                          arcade.color.WHITE,
