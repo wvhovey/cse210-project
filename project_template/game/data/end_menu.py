@@ -12,16 +12,18 @@ class End_Menu(arcade.View):
         self.game_view = game_view
 
     def on_show(self):
+        """ Called once when view is activated. """
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
+        """ Set up this view. """
         arcade.start_render()
 
         arcade.draw_text("GAME OVER", constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2+50,
                          arcade.color.WHITE, font_size=50, anchor_x="center")
 
         # Show tip to return or reset
-        arcade.draw_text("Press Esc. to quit",
+        arcade.draw_text("Press Esc. to quit (doesn't currently work)",
                          constants.SCREEN_WIDTH/2,
                          constants.SCREEN_HEIGHT/2,
                          arcade.color.WHITE,
@@ -35,6 +37,7 @@ class End_Menu(arcade.View):
                          anchor_x="center")
 
     def on_key_press(self, key, _modifiers):
+        """ Listens for a key press. """
         if key == arcade.key.ESCAPE:   # end game
             self.window.close_window()
         elif key == arcade.key.ENTER:  # restart game

@@ -49,24 +49,6 @@ class PlayerSprite(arcade.Sprite):
                 self.respawning = 0
                 self.alpha = 255
 
-        # if self.speed > 0:
-        #     self.speed -= self.drag
-        #     if self.speed < 0:
-        #         self.speed = 0
-
-        # if self.speed < 0:
-        #     self.speed += self.drag
-        #     if self.speed > 0:
-        #         self.speed = 0
-
-        # if self.speed > self.max_speed:
-        #     self.speed = self.max_speed
-        # if self.speed < -self.max_speed:
-        #     self.speed = -self.max_speed
-
-        # self.change_x = -math.sin(math.radians(self.angle)) * self.speed
-        # self.change_y = math.cos(math.radians(self.angle)) * self.speed
-
         self.center_x += self.change_x
         self.center_y += self.change_y
 
