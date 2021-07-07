@@ -19,6 +19,7 @@ from data.player_sprite import PlayerSprite
 from data.turning_sprite import TurningSprite
 from data.pause_menu import Pause_Menu
 from data.end_menu import End_Menu
+from data.win_menu import Win_Menu
 
 class Game(arcade.View):
     """ Main application class. """

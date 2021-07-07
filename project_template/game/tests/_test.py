@@ -208,3 +208,4 @@ def test_constants():
     assert constants.BOTTOM_LIMIT == -constants.OFFSCREEN_SPACE
     assert constants.TOP_LIMIT == constants.SCREEN_HEIGHT + constants.OFFSCREEN_SPACE
     assert constants.MOVEMENT_SPEED == 5
+    
