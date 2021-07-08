@@ -3,7 +3,9 @@
 # import math
 # import pytest
 # import os
+import arcade
 from data import constants
+from data.game import Game
 
 # # import constants 
 
@@ -208,4 +210,14 @@ def test_constants():
     assert constants.BOTTOM_LIMIT == -constants.OFFSCREEN_SPACE
     assert constants.TOP_LIMIT == constants.SCREEN_HEIGHT + constants.OFFSCREEN_SPACE
     assert constants.MOVEMENT_SPEED == 5
+
+def test_game():
+    window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+    game = Game()
+    window.show_view(game)
+    arcade.run()
+
+    assert game.unhealthy_food_list >= 0
+    assert game.healthy_food_list >= 0
+    
     
