@@ -69,7 +69,7 @@ class Game(arcade.View):
         self.frame_count = 0
         self.game_over = False
 
-        arcade.set_background_color(arcade.color.AMAZON) 
+        arcade.set_background_color(arcade.color.BLACK) 
 
         self.left_pressed = False
         self.right_pressed = False
