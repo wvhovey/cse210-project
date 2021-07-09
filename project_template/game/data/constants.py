@@ -4,6 +4,9 @@ Declares constant variables globally
 for all files within this program
 
 """
+from pathlib import Path
+root = Path(__file__).parent
+assets_dir = str(root)  + "\\assets\\"  
 
 STARTING_food_COUNT = 10
 SCALE = 0.5

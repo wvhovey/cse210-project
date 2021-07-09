@@ -73,6 +73,7 @@ class Game(arcade.View):
         # Sprite lists
         self.player_sprite_list = arcade.SpriteList()
         self.healthy_food_list = arcade.SpriteList()
+        self.unhealthy_food_list = arcade.SpriteList()
         self.player_life_list = arcade.SpriteList()
 
         # Set up the player
@@ -86,11 +87,11 @@ class Game(arcade.View):
         self.down_pressed = False
 
         # Sounds
-        self.laser_sound = arcade.load_sound("../assets/sounds/laser1.ogg")
-        self.hit_sound1 = arcade.load_sound("../assets/sounds/laser1.ogg")
-        self.hit_sound2 = arcade.load_sound("../assets/sounds/laser1.ogg")
-        self.hit_sound3 = arcade.load_sound("../assets/sounds/laser1.ogg")
-        self.hit_sound4 = arcade.load_sound("../assets/sounds/laser1.ogg")
+        self.laser_sound = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
+        self.hit_sound1 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
+        self.hit_sound2 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
+        self.hit_sound3 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
+        self.hit_sound4 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
 
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
@@ -120,14 +121,14 @@ class Game(arcade.View):
 
         # Set up the player
         self.weight = 250
-        self.player_sprite = PlayerSprite("../assets/images/man.png", self.player_scale)
+        self.player_sprite = PlayerSprite(constants.assets_dir + "images\man.png", self.player_scale)
         self.player_sprite_list.append(self.player_sprite)
         self.lives = 3
 
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            life = arcade.Sprite("../assets/images/man.png", constants.SCALE)
+            life = arcade.Sprite(constants.assets_dir + "images\man.png", constants.SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
@@ -147,16 +148,16 @@ class Game(arcade.View):
             count (integer): Controls the number of food items present.
         """
         
-        image_list = ("../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png",
-                      "../assets/images/cake.png")
+        image_list = (constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png",
+                      constants.assets_dir + "images/cake.png")
         for i in range(count):
             image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
@@ -181,16 +182,16 @@ class Game(arcade.View):
             
         """
 
-        image_list = ("../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png",
-                      "../assets/images/salad.png")
+        image_list = (constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png",
+                      constants.assets_dir + "images/salad.png")
         for i in range(count):
             image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
@@ -316,7 +317,7 @@ class Game(arcade.View):
             #         # append the new sprite to sprite list. <--- Lines 369 - 372
             #         self.player_scale += 0.2
             #         self.player_sprite_list.remove(self.player_sprite)
-            #         self.player_sprite = PlayerSprite("../assets/images/man.png", self.player_scale)
+            #         self.player_sprite = PlayerSprite(constants.assets_dir + "images/man.png", self.player_scale)
             #         self.player_sprite_list.append(self.player_sprite)
             #         self.lives -= 1
             #         self.player_sprite.respawn()
@@ -339,7 +340,7 @@ class Game(arcade.View):
                     healthy_foods[0].remove_from_sprite_lists()
                     self.create_healthy_food(1)
                     for player in self.player_sprite_list:
-                        # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
+                        # player.append_texture(arcade.load_texture(constants.assets_dir + "images/iceCream.png")) # This can be used to change image of player after being hit
                         # player.set_texture(1) # This can be used to change image of player after being hit
                         player.width = player.width / 1.5 # increases player size 
                         player.height = player.height / 1.5 # increases player size
@@ -359,7 +360,7 @@ class Game(arcade.View):
                     unhealthy_foods[0].remove_from_sprite_lists()
                     self.create_unhealthy_food(1)
                     for player in self.player_sprite_list:
-                        # player.append_texture(arcade.load_texture("../assets/images/iceCream.png")) # This can be used to change image of player after being hit
+                        # player.append_texture(arcade.load_texture(constants.assets_dir + "images/iceCream.png")) # This can be used to change image of player after being hit
                         # player.set_texture(1) # This can be used to change image of player after being hit
                         player.width = player.width * 1.5 # increases player size 
                         player.height = player.height * 1.5 # increases player size

@@ -5,9 +5,10 @@ Class: Food_Sprite()
 Functions:  __init__()
             update()
 """
-
 from data import constants
 import arcade
+
+
 
 class FoodSprite(arcade.Sprite):
     """ This class creates the movement of the food sprites and plays a sound on collision.
@@ -32,9 +33,9 @@ class FoodSprite(arcade.Sprite):
         self.size = 0
         self.type_of_food = good_bad
         if self.type_of_food == 'bad':
-            self.eating_sound = "../assets/sounds/laser1.ogg"
+            self.eating_sound = constants.assets_dir + "/sounds/laser1.ogg"
         elif self.type_of_food == 'good':
-            self.eating_sound = "../assets/sounds/laser1.ogg"
+            self.eating_sound = constants.assets_dir + "/sounds/laser1.ogg"
 
     def update(self):
         """ Moves the food around in different directions.
