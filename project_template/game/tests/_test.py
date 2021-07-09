@@ -1,8 +1,10 @@
-# import random
-# import arcade
-# import math
-# import pytest
-# import os
+""" -- Test File --
+
+Class: n/a
+
+Functions:  test_constants()
+            test_game()
+"""
 import arcade
 from data import constants
 from data.game import Game
@@ -198,6 +200,10 @@ from data.game import Game
 #         assert capsys.bottom == 0
 
 def test_constants():
+    """ Test code for the constants file
+
+        Args: n/a
+    """
     assert constants.SCREEN_WIDTH == 800
     assert constants.STARTING_food_COUNT == 10
     assert constants.SCALE == 0.5
@@ -212,6 +218,10 @@ def test_constants():
     assert constants.MOVEMENT_SPEED == 5
 
 def test_game():
+    """ Test code for the game file
+
+    Args: n/a
+    """
     window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
     game = Game()
     window.show_view(game)

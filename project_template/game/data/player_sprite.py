@@ -1,15 +1,39 @@
+""" -- Player Sprite File --
+
+Class: Player_Sprite()
+
+Functions:  __init__()
+            respawn()
+            update()
+            setup()
+"""
+
 from data import constants
 import arcade
 import math
 
 class PlayerSprite(arcade.Sprite):
-    """
-    Sprite that represents our player.
 
-    Derives from arcade.Sprite.
+    """ This class is in charge of the user's character. Its appearance, movement, behavior,
+        and respawn on collision.
+
+    Stereotype: 
+        Service Provider
+
+    Attributes:
+        speed (integer): Holds the speed of character's movement.
+        max_speed (integer): sets the maximum speed the character can move.
+        drag (integer): holds the drag on the character's movement.
+        respawning (boolean): determines whether or not to respawn the character.
     """
     def __init__(self, filename, SCALE):
-        """ Set up the player. """
+        """The class constructor.
+        
+        Args:
+            self (PlayerSprite): An instance of PlayerSprite.
+            filename (string): holds the filename of the character sprite.
+            SCALE (Constants): holds the scale of the character.
+        """
 
         # Call the parent Sprite constructor
         super().__init__(filename, SCALE)
@@ -25,9 +49,13 @@ class PlayerSprite(arcade.Sprite):
         self.respawn()
 
     def respawn(self):
-        """
-        Called when we die and need to make a new player.
-        'respawning' is an invulnerability timer.
+
+        """ This function is called when a collision takes place. This changes the appearance of 
+            the player and creates invisibility frames.
+        
+        Args:
+            self (PlayerSprite): An instance of PlayerSprite.
+
         """
         # If we are in the middle of respawning, this is non-zero.
         self.respawning = True
@@ -36,10 +64,14 @@ class PlayerSprite(arcade.Sprite):
         self.angle = 0
 
     def update(self):
+
+        """ This function updates the position of the player based on key presses. 
+            If the player goes off-screen, they are moved to the other side of 
+            the window.
+        
+        Args:
+            self (PlayerSprite): An instance of PlayerSprite.
         """
-        Update our position and other particulars.
-        """
-        """ Move the player """
         # Move player.
 
         if self.respawning:
