@@ -88,11 +88,11 @@ class Game(arcade.View):
         self.down_pressed = False
 
         # Sounds
-        self.laser_sound = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
-        self.hit_sound1 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
-        self.hit_sound2 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
-        self.hit_sound3 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
-        self.hit_sound4 = arcade.load_sound(constants.assets_dir + "sounds\laser1.ogg")
+        self.laser_sound = arcade.load_sound(constants.assets_dir / "sounds" / "laser1.ogg")
+        self.hit_sound1 = arcade.load_sound(constants.assets_dir / "sounds" / "laser1.ogg")
+        self.hit_sound2 = arcade.load_sound(constants.assets_dir / "sounds" / "laser1.ogg")
+        self.hit_sound3 = arcade.load_sound(constants.assets_dir / "sounds" / "laser1.ogg")
+        self.hit_sound4 = arcade.load_sound(constants.assets_dir / "sounds" / "laser1.ogg")
 
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
@@ -122,14 +122,14 @@ class Game(arcade.View):
 
         # Set up the player
         self.weight = 250
-        self.player_sprite = PlayerSprite(constants.assets_dir + "images\man.png", self.player_scale)
+        self.player_sprite = PlayerSprite(constants.assets_dir / "images" / "man.png", self.player_scale)
         self.player_sprite_list.append(self.player_sprite)
         self.lives = 3
 
         # Set up the little icons that represent the player lives.
         cur_pos = 10
         for i in range(self.lives):
-            life = arcade.Sprite(constants.assets_dir + "images\man.png", constants.SCALE)
+            life = arcade.Sprite(constants.assets_dir / "images" / "man.png", constants.SCALE)
             life.center_x = cur_pos + life.width
             life.center_y = life.height
             cur_pos += life.width
@@ -149,16 +149,16 @@ class Game(arcade.View):
             count (integer): Controls the number of food items present.
         """
         
-        image_list = (constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png",
-                      constants.assets_dir + "images/cake.png")
+        image_list = (constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png",
+                      constants.assets_dir / "images" / "cake.png")
         for i in range(count):
             image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
@@ -183,16 +183,16 @@ class Game(arcade.View):
             
         """
 
-        image_list = (constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png",
-                      constants.assets_dir + "images/salad.png")
+        image_list = (constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png",
+                      constants.assets_dir / "images" / "salad.png")
         for i in range(count):
             image_no = random.randrange(10)
             food_sprite = FoodSprite(image_list[image_no], constants.SCALE)
