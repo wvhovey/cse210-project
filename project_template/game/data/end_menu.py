@@ -1,22 +1,52 @@
+""" -- End Menu File --
+
+Class: Instruction_Menu()
+
+Functions:  __init__()
+            on_show()
+            on_draw()
+            on_key_press()
+"""
+
 import random
 import arcade
 from arcade.gui import UIManager
 from data import constants
 
 class End_Menu(arcade.View):
-    """
-    The end screen menu, you can either quit or restart
+    """ This class creates the End menu when an end condition is met or the player ends the game.
+    
+    Stereotype:
+        Information Holder
+
+    Attributes:
+        game_view (object): holds the information for the current game view.
+
     """
     def __init__(self, game_view):
+        """ The class constructor.
+        
+        Args:
+            self (End_Menu): an instance of End_Menu.
+            game_view (object): an instance of game_view.
+        """        
         super().__init__()
         self.game_view = game_view
 
     def on_show(self):
-        """ Called once when view is activated. """
+        """ Sets the background color of the end menu.
+        
+        Args:
+            self (End_Menu): an instance of End_Menu.
+        """    
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
-        """ Set up this view. """
+        """ Creates the view for the end menu.
+        
+        Args:
+            self (End_Menu): an instance of End_Menu.
+        """    
         arcade.start_render()
 
         arcade.draw_text("GAME OVER", constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2+50,
@@ -37,7 +67,12 @@ class End_Menu(arcade.View):
                          anchor_x="center")
 
     def on_key_press(self, key, _modifiers):
-        """ Listens for a key press. """
+        """ Allows the user to end or resume the game on key press.
+        
+        Args:
+            self (End_Menu): an instance of End_Menu.
+            key (arcade.key): sets the keys to end or resume the game.
+        """  
         if key == arcade.key.ESCAPE:   # end game
             self.window.close()
         elif key == arcade.key.ENTER:  # restart game

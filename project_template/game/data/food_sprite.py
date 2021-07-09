@@ -1,10 +1,33 @@
+""" -- Food Sprite File --
+
+Class: Food_Sprite()
+
+Functions:  __init__()
+            update()
+"""
+
 from data import constants
 import arcade
 
 class FoodSprite(arcade.Sprite):
-    """ Sprite that represents an food. """
+    """ This class creates the movement of the food sprites and plays a sound on collision.
+    
+    Stereotype:
+        Information Holder
+
+    Attributes:
+        size (integer): holds the size of each food sprite.
+        type_of_food (string): holds the type of food (good or bad).
+    """
 
     def __init__(self, image_file_name, SCALE, good_bad = 'bad'):
+        """The class constructor.
+        
+        Args:
+            self (FoodSprite): an instance of FoodSprite.
+            image_file_name (Constants): holds the image file for each instance of food sprites.
+            good_bad (string): holds value of type_of_food.
+        """        
         super().__init__(image_file_name, constants.SCALE)
         self.size = 0
         self.type_of_food = good_bad
@@ -14,7 +37,11 @@ class FoodSprite(arcade.Sprite):
             self.eating_sound = "../assets/sounds/laser1.ogg"
 
     def update(self):
-        """ Move the food around. """
+        """ Moves the food around in different directions.
+        
+        Args:
+            self (FoodSprite): an instance of FoodSprite.
+        """  
         super().update()
         if self.center_x < constants.LEFT_LIMIT:
             self.center_x = constants.RIGHT_LIMIT

@@ -1,23 +1,53 @@
+""" -- Instruction Menu File --
+
+Class: Instruction_Menu()
+
+Functions:  __init__()
+            on_show()
+            on_draw()
+            on_key_press()
+"""
+
 import random
 import arcade
 from arcade.gui import UIManager
 from data import constants
 
 class Instruction_Menu(arcade.View):
-    """
-    An instruction menu
+    """ This class creates the Instruction menu when the player pushes a specified button.
+    
+    Stereotype:
+        Information Holder
+
+    Attributes:
+        instruction_view (object): holds the information for the instruction view.
+
     """
 
     def __init__(self, pause_view):
+        """ The class constructor.
+        
+        Args:
+            self (Instruction_Menu): an instance of Instruction_Menu.
+            pause_view (object): an instance of pause_view.
+        """   
         super().__init__()
         self.instruction_view = pause_view
 
     def on_show(self):
-        """ Called once when view is activated. """
+        """ Sets the background color of the instruction menu.
+        
+        Args:
+            self (Instruction_Menu): an instance of Instruction_Menu.
+        """   
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
-        """ Set up this view. """
+        """ Creates the view for the instruction menu.
+        
+        Args:
+            self (Instruction_Menu): an instance of Instruction_Menu.
+        """  
         arcade.start_render()
 
         arcade.draw_text("INSTRUCTIONS", constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2+140,
@@ -66,6 +96,11 @@ class Instruction_Menu(arcade.View):
                          anchor_x="center")
     
     def on_key_press(self, key, _modifiers):
-        """ Listens for a key press. """
+        """ Allows the user to resume the game on key press.
+        
+        Args:
+            self (Instruction_Menu): an instance of Instruction_Menu.
+            key (arcade.key): sets esc key to resume the game.
+        """ 
         if key == arcade.key.ESCAPE:   # resume game
             self.window.show_view(self.instruction_view)

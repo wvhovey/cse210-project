@@ -1,11 +1,16 @@
-"""
-food eater
+""" -- Game File --
 
-Shoot cake in this demo program created with
-Python and the Arcade library.
+Class: Game()
 
-Artwork from http://kenney.nl
-
+Functions:  __init__()
+            start_new_game()
+            create_unhealthy_food()
+            create_healthy_food()
+            on_draw()
+            on_key_press()
+            on_key_release()
+            on_update()
+            
 """
 import random
 import math
@@ -22,9 +27,36 @@ from data.end_menu import End_Menu
 from data.win_menu import Win_Menu
 
 class Game(arcade.View):
-    """ Main application class. """
+    """ This class is responsible for controling the sequence of play. 
+    
+    Stereotype:
+        Controller
+
+    Attributes: frame_count (integer): In charge of changing the frames of the game.
+                player_scale (float): The scale at which the player changes each time food is consumed.
+                game_over (boolean): Determines whether or not the game should continue.
+                player_sprite_list (arcade.SpriteList): Holds the sprite paths of the player's character.
+                healthy_food_list (arcade.SpriteList): Holds the sprite path of the healthy food(s).
+                player_life_list (arcade.SpriteList): Holds the sprite path of the unhealthy food(s).
+                weight (integer): Keeps track of the weight of the character.
+                player_sprite (Null): Initial upload of character sprite.
+                left_pressed (boolean): Keeps track of left button inputs.
+                right_pressed (boolean): Keeps track of right button inputs.
+                up_pressed (boolean): Keeps track of up button inputs.
+                down_pressed (boolean): Keeps track of down button inputs.
+                laser_sound (arcade.load_sound): Holds the sprite paths of sounds.
+                hit_sound1 (arcade.load_sound): Holds the sprite paths of sounds.
+                hit_sound2 (arcade.load_sound): Holds the sprite paths of sounds.
+                hit_sound3 (arcade.load_sound): Holds the sprite paths of sounds.
+                hit_sound4 (arcade.load_sound): Holds the sprite paths of sounds.
+    """
 
     def __init__(self):
+        """ The class constructor.
+        
+        Args:
+            self (Game): an instance of Game.
+        """
         super().__init__()
 
         # Set the working directory (where we expect to find files) to the same
@@ -64,7 +96,11 @@ class Game(arcade.View):
         arcade.set_background_color(arcade.color.BLACK)
 
     def start_new_game(self):
-        """ Set up the game and initialize the variables. """
+        """ Begins the sequence of play.
+        
+        Args:
+            self (Game): an instance of Game.
+        """
 
         self.frame_count = 0
         self.game_over = False
@@ -104,6 +140,13 @@ class Game(arcade.View):
         self.create_healthy_food(constants.STARTING_food_COUNT)
 
     def create_unhealthy_food(self, count):
+        """ Initializes all sprites for the unhealthy foods.
+        
+        Args:
+            self (Game): an instance of Game.
+            count (integer): Controls the number of food items present.
+        """
+        
         image_list = ("../assets/images/cake.png",
                       "../assets/images/cake.png",
                       "../assets/images/cake.png",
@@ -130,6 +173,14 @@ class Game(arcade.View):
             self.unhealthy_food_list.append(food_sprite)
 
     def create_healthy_food(self, count):
+        """ Initializes all sprites for the healthy foods.
+        
+        Args:
+            self (Game): an instance of Game.
+            count (integer): Controls the number of food items present.
+            
+        """
+
         image_list = ("../assets/images/salad.png",
                       "../assets/images/salad.png",
                       "../assets/images/salad.png",
@@ -156,8 +207,11 @@ class Game(arcade.View):
             self.healthy_food_list.append(food_sprite)
 
     def on_draw(self):
-        """
-        Render the screen.
+        """ Draws each sprite onto the screen.
+        
+        Args:
+            self (Game): an instance of Game.
+            
         """
 
         # This command has to happen before we start drawing
@@ -178,7 +232,13 @@ class Game(arcade.View):
 
 
     def on_key_press(self, symbol, modifiers):
-        """ Called whenever a key is pressed. """
+        """ Initializes all sprites for the healthy foods.
+        
+        Args:
+            self (Game): an instance of Game.
+            symbol (arcade.key): An instance of a key press.
+            
+        """
         
         if symbol == arcade.key.ESCAPE:
             # pass self, the current view, to preserve this view's state
@@ -195,7 +255,14 @@ class Game(arcade.View):
             self.right_pressed = True
 
     def on_key_release(self, symbol, modifiers):
-        """ Called whenever a key is released. """
+        """ Initializes all sprites for the healthy foods.
+        
+        Args:
+            self (Game): an instance of Game.
+            symbol (arcade.key): An instance of a key press.
+            
+        """
+        
         if symbol == arcade.key.W:
             self.up_pressed = False
         elif symbol == arcade.key.S:
@@ -206,7 +273,12 @@ class Game(arcade.View):
             self.right_pressed = False
 
     def on_update(self, x):
-        """ Move everything """
+        """ Updates the game during each sequence of play.
+        
+        Args:
+            self (Game): an instance of Game.
+            
+        """
 
         self.frame_count += 1
 
