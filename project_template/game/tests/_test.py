@@ -13,15 +13,15 @@ from typing import cast
 from arcade.window_commands import set_window
 
 from data import constants, food_sprite
-from data.game import End_Menu
-from data.game import FoodSprite
+from data.end_menu import End_Menu
+from data.food_sprite import FoodSprite
 from data.game import Game
-# from data.game import Instruction_Menu
-from data.game import Pause_Menu
-from data.game import PlayerSprite
-# from data.game import Start_Menu
-from data.game import TurningSprite
-from data.game import Win_Menu
+from data.instruction_menu import Instruction_Menu
+from data.pause_menu import Pause_Menu
+from data.player_sprite import PlayerSprite
+from data.start_menu import Start_Menu
+from data.turning_sprite import TurningSprite
+from data.win_menu import Win_Menu
 
 def test_constants():
     """ Test code for the constants file
@@ -66,24 +66,218 @@ def test_food_sprite():
     pass
 
 
+
+
+# ------- IGNORE THIS ------: It is for Debugging and used by Knighten,
+# I will delete it when I no longer need it, Thanks! :)
+
+# window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+# test = Game()
+# print(len(test.player_sprite_list))
+# print(len(test.healthy_food_list))
+# print(len(test.unhealthy_food_list))
+# print(len(test.player_life_list))
+
+# test.start_new_game()
+# print("space sdlkfjsdlk")
+# print(len(test.player_sprite_list))
+# print(len(test.healthy_food_list))
+# print(len(test.unhealthy_food_list))
+# print(len(test.player_life_list))
+
+
+
+
+
 def test_game():
     """ Test code for the game file
 
     Args: n/a
     """
     # window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
-#     game = Game()
-#     # window.show_view(game)
-#     # arcade.run()
+    test = Game()
+     # window.show_view(game)
+     # arcade.run()
 
-#     window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
-#     start_view = game.Start_Menu()
-#  #   window.show_view(start_view)
-#     arcade.run()
+    # window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+    # start_view = game.Start_Menu()
+ #   window.show_view(start_view)
+    # arcade.run()
 
-        # assert game.unhealthy_food_list >= 0
-    # assert game.healthy_food_list >= 0
-    pass
+    # test initilized variables
+    assert test.frame_count == 0
+    assert test.player_scale == 0.5
+    assert test.game_over == False
+
+    # test Sprite lists
+    assert test.player_sprite_list is not None
+    assert test.healthy_food_list is not None
+    assert test.unhealthy_food_list is not None
+    assert test.player_life_list is not None
+    # test Sprite lists are the correct lengths
+    assert len(test.player_sprite_list) == 0
+    assert len(test.healthy_food_list) == 0
+    assert len(test.unhealthy_food_list) == 0
+    assert len(test.player_life_list) == 0
+
+    # test Set up the player
+    assert test.weight == 250
+    assert test.player_sprite == None
+
+    # test that variables for key presses are correct
+    assert test.left_pressed == False
+    assert test.right_pressed == False
+    assert test.up_pressed == False
+    assert test.down_pressed == False
+
+    # test Sounds
+    assert test.laser_sound is not None
+    assert test.hit_sound1 is not None
+    assert test.hit_sound2 is not None
+    assert test.hit_sound3 is not None
+    assert test.hit_sound4 is not None
+
+
+    # call start_new_game function
+    test.start_new_game()
+
+    # Test everything is set up
+    assert test.frame_count == 0
+    assert test.game_over == False
+    assert test.left_pressed == False
+    assert test.right_pressed == False
+    assert test.up_pressed == False
+    assert test.down_pressed == False
+
+    # test Sprite lists still exist
+    assert test.player_sprite_list is not None
+    assert test.healthy_food_list is not None
+    assert test.unhealthy_food_list is not None
+    assert test.player_life_list is not None
+
+    # test Sprite lists to see if they are no longer zero because start_new_game() was called
+    assert len(test.player_sprite_list) == 1
+    assert len(test.healthy_food_list) == constants.STARTING_food_COUNT
+    assert len(test.unhealthy_food_list) == constants.STARTING_food_COUNT
+    assert len(test.player_life_list) == 3
+
+    # test Set up the player
+    assert test.weight == 250
+    assert test.player_sprite is not None
+    assert test.lives == 3
+
+
+    # Need to set up parameterized test for the following to test all options:
+    # symbol = arcade.key.W
+    # if symbol == arcade.key.W:
+    #     test.up_pressed = True
+    # elif symbol == arcade.key.S:
+    #     test.down_pressed = True
+    # elif symbol == arcade.key.A:
+    #     test.left_pressed = True
+    # elif symbol == arcade.key.D:
+    #     test.right_pressed = True
+
+    # test.on_key_press()
+
+
+
+
+
+def test_instruction_menu():
+    """ Test code for the instruction_menu file
+
+    Args: n/a
+    """
+    set_window(arcade.View)
+    test = Instruction_Menu(arcade.View)
+    Instruction_Menu.on_show(test)
+    # Instruction_Menu.on_draw(test)
+    Instruction_Menu.on_key_press(test, "ESCAPE", "none")
+    Instruction_Menu.on_key_press(test, "ENTER", "none")
+    assert test.window is not None
+    assert test.__doc__ is not None
+    assert test.key is None    
+
+
+def test_pause_menu():
+    """ Test code for the pause_menu file
+
+    Args: n/a
+    """
+    set_window(arcade.View)
+    # test = Pause_Menu(arcade.View)
+    # Pause_Menu.on_show(test)
+    # Pause_Menu.on_draw(test)
+    # Pause_Menu.on_key_press(test, "ESCAPE", "none")
+    # Pause_Menu.on_key_press(test, "ENTER", "none")
+    # assert test.window is not None
+    # assert test.__doc__ is not None
+    # assert test.key is None   
+
+def test_player_sprite():
+    """ Test code for the player_sprite file
+
+    Args: n/a
+    """
+    set_window(arcade.Sprite)
+    #test = PlayerSprite("cake.png", constants.SCALE)
+    # PlayerSprite.on_show(test)
+    # PlayerSprite.on_draw(test)
+    # PlayerSprite.on_key_press(test, "ESCAPE", "none")
+    # PlayerSprite.on_key_press(test, "ENTER", "none")
+    # assert test.window is not None
+    # assert test.__doc__ is not None
+    # assert test.key is None 
+
+
+def test_start_menu():
+    """ Test code for the start_menu file
+
+    Args: n/a
+    """
+    set_window(arcade.View)
+    # test = Start_Menu()
+    # Start_Menu.on_show(test)
+    # Start_Menu.on_draw(test)
+    # Start_Menu.on_key_press(test, "ESCAPE", "none")
+    # Start_Menu.on_key_press(test, "ENTER", "none")
+    # assert test.window is not None
+    # assert test.__doc__ is not None
+    # assert test.key is None 
+
+
+
+def test_turning_sprite(): # MAYBE DELETE.... I DON"T THINK WE USE THIS
+    """ Test code for the turning_sprite file
+
+    Args: n/a
+    """
+    # set_window(arcade.Sprite)
+    #test = PlayerSprite("cake.png", constants.SCALE)
+    # PlayerSprite.on_show(test)
+    # PlayerSprite.on_draw(test)
+    # PlayerSprite.on_key_press(test, "ESCAPE", "none")
+    # PlayerSprite.on_key_press(test, "ENTER", "none")
+    # assert test.window is not None
+    # assert test.__doc__ is not None
+    # assert test.key is None 
+
+
+def test_win_menu():
+    """ Test code for the win_menu file
+
+    Args: n/a
+    """
+    set_window(arcade.View)
+    test = Win_Menu(arcade.View)
+    Win_Menu.on_show(test)
+    # Win_Menu.on_draw(test)
+    # Win_Menu.on_key_press(test, "ESCAPE", "none")
+    # StarWin_Menut_Menu.on_key_press(test, "ENTER", "none")
+    assert test.window is not None
+    assert test.__doc__ is not None
+    assert test.key is None 
 
 
 

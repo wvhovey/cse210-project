@@ -6,8 +6,9 @@ for all files within this program
 """
 from pathlib import Path
 root = Path(__file__).parent
-assets_dir = str(root)  + "\\assets\\"  
-
+assets_dir = root / "assets"  
+# print("fasklfdjsflksjdlkjfksj")
+# print(assets_dir)
 STARTING_food_COUNT = 10
 SCALE = 0.5
 OFFSCREEN_SPACE = 10
