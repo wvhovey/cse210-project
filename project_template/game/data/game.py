@@ -68,6 +68,7 @@ class Game(arcade.View):
 
         self.frame_count = 0
         self.player_scale = 0.5
+        self.total_time = 0.0
         self.game_over = False
 
         # Sprite lists
@@ -222,11 +223,19 @@ class Game(arcade.View):
         self.unhealthy_food_list.draw()
         self.player_sprite_list.draw()
 
+        # Calculate minutes
+        minutes = int(self.total_time) // 60
+
+        # Calculate seconds by using a modulus (remainder)
+        seconds = int(self.total_time) % 60
+
+
         # Put the text on the screen.
         output = f"Weight: {self.weight}"
         arcade.draw_text(output, 10, 70, arcade.color.WHITE, 13)
 
-        output = f"food Count: {len(self.healthy_food_list)}"
+        # output = f"food Count: {len(self.healthy_food_list)}"
+        output = f"Time: {minutes:02d}:{seconds:02d}"
         arcade.draw_text(output, 10, 50, arcade.color.WHITE, 13)
 
 
@@ -272,15 +281,11 @@ class Game(arcade.View):
         elif symbol == arcade.key.D:
             self.right_pressed = False
 
-    def on_update(self, x):
-        """ Updates the game during each sequence of play.
-        
-        Args:
-            self (Game): an instance of Game.
-            
-        """
+    def on_update(self, delta_time):
+        """ Move everything """
 
         self.frame_count += 1
+        self.total_time += delta_time
 
         if not self.game_over:
             self.healthy_food_list.update()
