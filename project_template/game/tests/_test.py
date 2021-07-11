@@ -127,11 +127,12 @@ def test_game():
     assert test.down_pressed == False
 
     # test Sounds
-    assert test.laser_sound is not None
-    assert test.hit_sound1 is not None
-    assert test.hit_sound2 is not None
-    assert test.hit_sound3 is not None
-    assert test.hit_sound4 is not None
+    assert test.munch is not None
+    assert test.munch2 is not None
+    assert test.munch3 is not None
+    assert test.munch4 is not None
+    assert test.munch5 is not None
+
 
     # call start_new_game function
     test.start_new_game()
