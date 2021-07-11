@@ -66,7 +66,7 @@ class Instruction_Menu(arcade.View):
                          anchor_x="center")
         arcade.draw_text("To win, you must live for 1 minute. Keep an eye on the timer on the bottom left!",
                          constants.SCREEN_WIDTH/2,
-                         constants.SCREEN_HEIGHT/2-s0,
+                         constants.SCREEN_HEIGHT/2-30,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
