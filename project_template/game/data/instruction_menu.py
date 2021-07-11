@@ -64,7 +64,7 @@ class Instruction_Menu(arcade.View):
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("To win, you must live for 1 minute. Keep an eye on the timer on the bottom left!",
+        arcade.draw_text("To win, you must live for 1 minute. Watch the timer on the bottom left!",
                          constants.SCREEN_WIDTH/2,
                          constants.SCREEN_HEIGHT/2-30,
                          arcade.color.WHITE,
@@ -94,7 +94,7 @@ class Instruction_Menu(arcade.View):
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Dont go below 100 weight or above 400 weight or you will lose",
+        arcade.draw_text("Don't go below 100 weight or above 400 weight or you will lose",
                          constants.SCREEN_WIDTH/2,
                          constants.SCREEN_HEIGHT/2-180,
                          arcade.color.WHITE,
