@@ -232,7 +232,39 @@ def test_player_sprite():
     """
     
     # test initialized variables
-    pass
+    test = PlayerSprite(constants.assets_dir / "images" / "man.png", 0.5)
+    assert test.speed == 0
+    assert test.max_speed == 4
+    assert test.drag == 0
+    assert test.respawning == True
+    test.respawning = False
+    assert test.respawning == False
+    test.respawn()
+    assert test.respawning == True
+    assert test.angle == 0
+    test.angle = 10
+    assert test.angle == 10
+    test.respawn()
+    assert test.angle == 0
+    assert test.right is not None
+
+    # test that when player moves off screen they teleport from top to bottom, right to left and vice versa
+    test.right = -1
+    test.update()
+    assert test.left == constants.SCREEN_WIDTH
+
+    test.left = constants.SCREEN_WIDTH + 1
+    test.update()
+    assert test.right == 0
+
+    test.bottom = -1
+    test.update()
+    assert test.top == constants.SCREEN_HEIGHT
+
+    test.top = constants.SCREEN_HEIGHT + 1
+    test.update()
+    assert test.bottom == 0
+
 
 def test_start_menu():
     """ Test code for the start_menu file

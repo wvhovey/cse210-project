@@ -302,34 +302,8 @@ class Game(arcade.View):
                 self.player_sprite.change_x = constants.MOVEMENT_SPEED
 
 
-            # Code that gives player invincibility after getting hit and respawns in center
-
-            # Call update to move the sprite
-            # If using a physics engine, call update player to rely on physics engine
-            # for movement, and call physics engine here.
-            # self.player_sprite_list.update()
-            # foods = arcade.check_for_collision_with_list(self.player_sprite, self.healthy_food_list) 
-            # if len(foods) > 0:
-            #     if self.lives > 0:
-            #         # scale the character, remove current sprite, add sprite with new scale,
-            #         # append the new sprite to sprite list. <--- Lines 369 - 372
-            #         self.player_scale += 0.2
-            #         self.player_sprite_list.remove(self.player_sprite)
-            #         self.player_sprite = PlayerSprite(constants.assets_dir + "images/man.png", self.player_scale)
-            #         self.player_sprite_list.append(self.player_sprite)
-            #         self.lives -= 1
-            #         self.player_sprite.respawn()
-            #         # foods[0].remove_from_sprite_lists()
-            #         self.player_life_list.pop().remove_from_sprite_lists()
-            #         self.hit_sound3.play()
-            #         print("Crash")
-            #     else:
-
-
-            # Code if we want the player to stay in same place after being hit with no invincibility frames
+            # Code so the player stays in the same place after being hit and player get's bigger/smaller
             # code works by increasing the player's height and width if they're hit
-            # to easily comment between the two do: highlight everything and press Ctrl + ?/ 
-
             self.player_sprite_list.update()
             healthy_foods = arcade.check_for_collision_with_list(self.player_sprite, self.healthy_food_list) 
             if len(healthy_foods) > 0:
