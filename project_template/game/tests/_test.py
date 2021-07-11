@@ -160,10 +160,20 @@ def test_game():
     assert test.player_sprite is not None
 
     # test create_unhealthy_food
+    test.create_healthy_food(10) # add another 10 items to list of 10
+    assert len(test.healthy_food_list) == 20
+    test.create_healthy_food(0)
+    assert len(test.healthy_food_list) == 20
 
     # test create_healthy_food
+    test.create_unhealthy_food(10) # add another 10 items to list of 10
+    assert len(test.unhealthy_food_list) == 20
+    test.create_unhealthy_food(0)
+    assert len(test.unhealthy_food_list) == 20
 
     # test on_draw
+    #  It gives this Error: E       AttributeError: type object 'View' has no attribute 'clear'
+    # test.on_draw()
 
     # call on_update
     test.on_update(1)
@@ -215,15 +225,11 @@ def test_pause_menu():
 
     Args: n/a
     """
+    # Get the following error when trying to test pause_menu: E    AttributeError: type object 'View' has no attribute 'push_handlers'
+
     # set_window(arcade.View)
     # test = Pause_Menu(arcade.View)
-    # Pause_Menu.on_show(test)
-    # Pause_Menu.on_draw(test)
-    # Pause_Menu.on_key_press(test, "ESCAPE", "none")
-    # Pause_Menu.on_key_press(test, "ENTER", "none")
-    # assert test.window is not None
-    # assert test.__doc__ is not None
-    # assert test.key is None   
+
 
 def test_player_sprite():
     """ Test code for the player_sprite file
