@@ -92,6 +92,7 @@ class Game(arcade.View):
         self.munch4 = arcade.load_sound(constants.assets_dir / "sounds" / "munch4.mp3")
         self.munch5 = arcade.load_sound(constants.assets_dir / "sounds" / "munch5.mp3")
 
+
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
 
@@ -328,7 +329,9 @@ class Game(arcade.View):
 
             unhealthy_foods = arcade.check_for_collision_with_list(self.player_sprite, self.unhealthy_food_list) 
             if len(unhealthy_foods) > 0:
-                arcade.play_sound(self.munch2)
+                munch_list = [self.munch, self.munch2, self.munch3, self.munch4, self.munch5]
+                munch = random.choice(munch_list)
+                arcade.play_sound(munch)
                 if self.weight > 0:
                     self.weight += 50
                     unhealthy_foods[0].remove_from_sprite_lists()
