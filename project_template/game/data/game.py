@@ -314,12 +314,14 @@ class Game(arcade.View):
                 arcade.play_sound(munch)
                 if self.weight > 100:
                     self.weight -= 50
+                    constants.MOVEMENT_SPEED = constants.MOVEMENT_SPEED * 1.5
                     healthy_foods[0].remove_from_sprite_lists()
                     self.create_healthy_food(1)
                     for player in self.player_sprite_list:
                         player.width = player.width / 1.5 # increases player size 
                         player.height = player.height / 1.5 # increases player size
                 if self.weight <= 100:
+                    constants.MOVEMENT_SPEED = 4
                     self.game_over = True
                     self.player_scale = 0.5
                     print("Game over")
@@ -334,6 +336,7 @@ class Game(arcade.View):
                 arcade.play_sound(munch)
                 if self.weight > 0:
                     self.weight += 50
+                    constants.MOVEMENT_SPEED = constants.MOVEMENT_SPEED / 1.5
                     unhealthy_foods[0].remove_from_sprite_lists()
                     self.create_unhealthy_food(1)
                     for player in self.player_sprite_list:
@@ -342,6 +345,7 @@ class Game(arcade.View):
                         player.width = player.width * 1.5 # increases player size 
                         player.height = player.height * 1.5 # increases player size
                 if self.weight >= 400:
+                    constants.MOVEMENT_SPEED = 4
                     self.game_over = True
                     self.player_scale = 0.5
                     print("Game over")
