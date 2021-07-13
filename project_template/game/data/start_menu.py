@@ -15,6 +15,10 @@ import arcade
 from arcade.gui import UIManager
 from data.game import Game
 from data.instruction_menu import Instruction_Menu
+from data import constants
+import time
+
+MUSIC_VOLUME = 0.5
 
 class Start_Menu(arcade.View):
     """ This class creates the Start menu when the program begins.
@@ -38,6 +42,23 @@ class Start_Menu(arcade.View):
 
         self.ui_manager = UIManager()
         self.view = None
+
+        # Music
+        self.music_list = []
+        self.current_song_index = 0
+        self.current_player = None
+        self.music = None
+
+    def play_song(self):
+
+        """ Play the song. """
+        # Stop what is currently playing.
+        if self.music:
+            self.music.stop(self.current_player)
+
+        self.music = arcade.Sound(self.music_list[self.current_song_index], streaming=True)
+        self.current_player = self.music.play(MUSIC_VOLUME)
+        time.sleep(0.3)
 
     def on_draw(self):
         """ Renders the start menu with the correct ui.
@@ -64,6 +85,12 @@ class Start_Menu(arcade.View):
             self (Start_Menu): an instance of Start_Menu.
         """  
         self.ui_manager.purge_ui_elements()
+
+        # self.song1 = constants.assets_dir / "sounds" / "25_Battle of Stoicism.mp3"
+        self.song1 = constants.assets_dir / "sounds" / "02 Kokiri.mp3"
+        self.music_list = [self.song1]
+        self.current_song_index = 0
+        self.play_song()
 
         # Makes variables to place the buttons
         y_slot = self.window.height // 3
@@ -107,6 +134,7 @@ class Start_Menu(arcade.View):
         Args:
             self (Start_Menu): an instance of Start_Menu.
         """  
+        self.music.stop(self.current_player)
         self.ui_manager.purge_ui_elements()
         instruction = Instruction_Menu(self)
         self.window.show_view(instruction)
@@ -116,7 +144,8 @@ class Start_Menu(arcade.View):
         
         Args:
             self (Start_Menu): an instance of Start_Menu.
-        """  
+        """
+        self.music.stop(self.current_player)
         self.ui_manager.purge_ui_elements()
         game = Game()
         game.start_new_game()
