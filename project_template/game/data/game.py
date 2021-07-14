@@ -92,7 +92,12 @@ class Game(arcade.View):
         self.munch4 = arcade.load_sound(constants.assets_dir / "sounds" / "munch4.mp3")
         self.munch5 = arcade.load_sound(constants.assets_dir / "sounds" / "munch5.mp3")
 
-
+        # Music
+        self.music_list = []
+        self.current_song_index = 0
+        self.current_player = None
+        self.music = None
+        
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
 
