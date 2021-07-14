@@ -87,7 +87,7 @@ class Start_Menu(arcade.View):
         self.ui_manager.purge_ui_elements()
 
         # self.song1 = constants.assets_dir / "sounds" / "25_Battle of Stoicism.mp3"
-        self.song1 = constants.assets_dir / "sounds" / "02 Kokiri.mp3"
+        self.song1 = constants.assets_dir / "sounds" / "068 - Slow and Steady.mp3"
         self.music_list = [self.song1]
         self.current_song_index = 0
         self.play_song()
