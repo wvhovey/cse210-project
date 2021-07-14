@@ -14,6 +14,7 @@ Functions:  __init__()
 """
 import random
 import math
+import time
 import arcade
 import os
 
@@ -25,6 +26,7 @@ from data.pause_menu import Pause_Menu
 from data.end_menu import End_Menu
 from data.win_menu import Win_Menu
 
+MUSIC_VOLUME = 0.5
 class Game(arcade.View):
     """ This class is responsible for controling the sequence of play. 
     
@@ -101,6 +103,23 @@ class Game(arcade.View):
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
 
+    def play_song(self):
+
+        """ Play the song. """
+        # Stop what is currently playing.
+        if self.music:
+            self.music.stop(self.current_player)
+
+        self.music = arcade.Sound(self.music_list[self.current_song_index], streaming=True)
+        self.current_player = self.music.play(MUSIC_VOLUME)
+        time.sleep(0.3)
+
+    def on_setup(self):
+        self.song1 = constants.assets_dir / "sounds" / "02 Kokiri.mp3"
+        self.music_list = [self.song1]
+        self.current_song_index = 0
+        self.play_song()
+
     def start_new_game(self):
         """ Begins the sequence of play.
         
@@ -111,6 +130,7 @@ class Game(arcade.View):
         self.frame_count = 0
         self.total_time = 0
         self.game_over = False
+        self.on_setup()
 
         arcade.set_background_color(arcade.color.BLACK) 
 
@@ -285,6 +305,7 @@ class Game(arcade.View):
         n = 1
         if self.total_time // 60 >= n:
             self.game_over = True
+            self.music.stop(self.current_player)
             win = Win_Menu(self)
             self.window.show_view(win)
 
@@ -329,6 +350,7 @@ class Game(arcade.View):
                     constants.MOVEMENT_SPEED = 4
                     self.game_over = True
                     self.player_scale = 0.5
+                    self.music.stop(self.current_player)
                     print("Game over")
                     # pass self, the current view, to preserve this view's state
                     end = End_Menu(self)
@@ -353,6 +375,7 @@ class Game(arcade.View):
                     constants.MOVEMENT_SPEED = 4
                     self.game_over = True
                     self.player_scale = 0.5
+                    self.music.stop(self.current_player)
                     print("Game over")
                     # pass self, the current view, to preserve this view's state
                     end = End_Menu(self)
