@@ -181,8 +181,8 @@ class Game(arcade.View):
             food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, constants.TOP_LIMIT)
             food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, constants.RIGHT_LIMIT)
 
-            food_sprite.change_x = random.random() * 2 - 1
-            food_sprite.change_y = random.random() * 2 - 1
+            food_sprite.change_x = random.random() * 2 - 1 + (self.total_time / 10)
+            food_sprite.change_y = random.random() * 2 - 1 + (self.total_time / 10)
 
             food_sprite.change_angle = (random.random() - 0.5) * 2
             food_sprite.size = 4
@@ -215,12 +215,21 @@ class Game(arcade.View):
             food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, constants.TOP_LIMIT)
             food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, constants.RIGHT_LIMIT)
 
-            food_sprite.change_x = random.random() * 2 - 1
-            food_sprite.change_y = random.random() * 2 - 1
+
+            food_sprite.change_x = random.random() * 2 * - 1 + (self.total_time / 10) 
+            food_sprite.change_y = random.random() * 2 * - 1 + (self.total_time / 10)
 
             food_sprite.change_angle = (random.random() - 0.5) * 2
-            food_sprite.size = 4
+            food_sprite.size = 4 
+
             self.healthy_food_list.append(food_sprite)
+
+        # for i in image_list:
+        #     food_sprite.change_x = random.random() * 2 * self.total_time - 1
+        #     food_sprite.change_y = random.random() * 2 * self.total_time - 1
+
+        #     food_sprite.change_angle = (random.random() - 0.5) * 2 * self.total_time
+        #     food_sprite.size = 4 * self.total_time
 
     def on_draw(self):
         """ Draws each sprite onto the screen.
@@ -300,6 +309,51 @@ class Game(arcade.View):
         self.frame_count += 1
         self.player_sprite.angle += 0.5
         self.total_time += delta_time
+
+        self.move_time = (self.total_time + 1) / 20000
+
+        # increase speed of healthy food over time
+        counter = 0
+        for food in self.healthy_food_list:
+            if counter == 4:
+                counter -= 4
+
+            if counter == 0:
+                food.change_x += self.move_time
+                food.change_y += self.move_time
+            elif counter == 1:
+                food.change_x -= self.move_time
+                food.change_y += self.move_time
+            elif counter == 2:
+                food.change_x -= self.move_time
+                food.change_y -= self.move_time
+            elif counter == 3:
+                food.change_x += self.move_time
+                food.change_y -= self.move_time
+
+            counter += 1
+
+        # increase speed of unhealthy food over time
+        counter = 0
+        for food in self.unhealthy_food_list:
+            if counter == 4:
+                counter -= 4
+
+            if counter == 0:
+                food.change_x += self.move_time
+                food.change_y += self.move_time
+            elif counter == 1:
+                food.change_x -= self.move_time
+                food.change_y += self.move_time
+            elif counter == 2:
+                food.change_x -= self.move_time
+                food.change_y -= self.move_time
+            elif counter == 3:
+                food.change_x += self.move_time
+                food.change_y -= self.move_time
+
+            counter += 1
+
 
         # You win if you last for n minutes
         n = 1
