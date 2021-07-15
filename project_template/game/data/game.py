@@ -153,10 +153,12 @@ class Game(arcade.View):
         self.player_sprite_list.append(self.player_sprite)
 
         # Make the unhealthy foods
-        self.create_unhealthy_food(constants.STARTING_food_COUNT)
+        if self.window.width > 1300 and self.window.height > 1000:
+            starting_food_count = constants.STARTING_food_COUNT * 2
+        self.create_unhealthy_food(starting_food_count)
 
         # Make the healthy foods
-        self.create_healthy_food(constants.STARTING_food_COUNT)
+        self.create_healthy_food(starting_food_count)
 
     def create_unhealthy_food(self, count):
         """ Initializes all sprites for the unhealthy foods.
