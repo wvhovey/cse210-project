@@ -105,6 +105,7 @@ class Game(arcade.View):
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
 
+
     def play_song(self):
 
         """ Play the song. """
@@ -148,7 +149,7 @@ class Game(arcade.View):
 
         # Set up the player
         self.weight = 250
-        self.player_sprite = PlayerSprite(constants.assets_dir / "images" / "fat-astronaut.png", self.player_scale)
+        self.player_sprite = PlayerSprite(constants.assets_dir / "images" / "fat-astronaut.png", self.player_scale, self.window.width, self.window.height)
         self.player_sprite_list.append(self.player_sprite)
 
         # Make the unhealthy foods
@@ -177,11 +178,11 @@ class Game(arcade.View):
                       constants.assets_dir / "images" / "foodKit_v1.2" / "side" / "hotDog.png")
         for i in range(count):
             image_no = random.randrange(10)
-            food_sprite = FoodSprite(image_list[image_no], constants.SCALE, "bad")
+            food_sprite = FoodSprite(image_list[image_no], constants.SCALE, self.window.width, self.window.height, "bad")
             food_sprite.guid = "food"
 
-            food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, constants.TOP_LIMIT)
-            food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, constants.RIGHT_LIMIT)
+            food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, self.window.height + constants.OFFSCREEN_SPACE)
+            food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, self.window.width + constants.OFFSCREEN_SPACE)
 
             food_sprite.change_x = random.random() * 2 - 1 + (self.total_time / 10)
             food_sprite.change_y = random.random() * 2 - 1 + (self.total_time / 10)
@@ -211,11 +212,11 @@ class Game(arcade.View):
                       constants.assets_dir / "images" / "foodKit_v1.2" / "side" / "celeryStick.png")
         for i in range(count):
             image_no = random.randrange(10)
-            food_sprite = FoodSprite(image_list[image_no], constants.SCALE, "good")
+            food_sprite = FoodSprite(image_list[image_no], constants.SCALE, self.window.width, self.window.height, "good")
             food_sprite.guid = "food"
 
-            food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, constants.TOP_LIMIT)
-            food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, constants.RIGHT_LIMIT)
+            food_sprite.center_y = random.randrange(constants.BOTTOM_LIMIT, self.window.height + constants.OFFSCREEN_SPACE)
+            food_sprite.center_x = random.randrange(constants.LEFT_LIMIT, self.window.width + constants.OFFSCREEN_SPACE)
 
 
             food_sprite.change_x = random.random() * 2 * - 1 + (self.total_time / 10) 

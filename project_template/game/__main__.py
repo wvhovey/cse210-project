@@ -15,7 +15,11 @@ def main():
 
     Args: none.
     """
-    window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+    window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE, fullscreen=True)
+    width, height = window.get_size()
+
+    window.set_viewport(0, width, 0, height)
+
     start_view = Start_Menu()
     window.show_view(start_view)
     arcade.run()

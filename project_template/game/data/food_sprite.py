@@ -21,7 +21,7 @@ class FoodSprite(arcade.Sprite):
         type_of_food (string): holds the type of food (good or bad).
     """
 
-    def __init__(self, image_file_name, SCALE, good_bad = 'bad'):
+    def __init__(self, image_file_name, SCALE, width, height, good_bad = 'bad'):
         """The class constructor.
         
         Args:
@@ -36,6 +36,8 @@ class FoodSprite(arcade.Sprite):
             self.eating_sound = constants.assets_dir / "sounds" / "laser1.ogg"
         elif self.type_of_food == 'good':
             self.eating_sound = constants.assets_dir / "sounds" / "laser1.ogg"
+        self.screen_width = width
+        self.screen_height = height
 
     def update(self):
         """ Moves the food around in different directions.
@@ -45,10 +47,10 @@ class FoodSprite(arcade.Sprite):
         """  
         super().update()
         if self.center_x < constants.LEFT_LIMIT:
-            self.center_x = constants.RIGHT_LIMIT
-        if self.center_x > constants.RIGHT_LIMIT:
+            self.center_x = self.screen_width + constants.OFFSCREEN_SPACE
+        if self.center_x > self.screen_width + constants.OFFSCREEN_SPACE:
             self.center_x = constants.LEFT_LIMIT
-        if self.center_y > constants.TOP_LIMIT:
+        if self.center_y > self.screen_height + constants.OFFSCREEN_SPACE:
             self.center_y = constants.BOTTOM_LIMIT
         if self.center_y < constants.BOTTOM_LIMIT:
-            self.center_y = constants.TOP_LIMIT
+            self.center_y = self.screen_height + constants.OFFSCREEN_SPACE
