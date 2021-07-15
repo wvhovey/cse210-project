@@ -65,19 +65,19 @@ class Pause_Menu(arcade.View):
                                           bottom=player_sprite.bottom,
                                           color=arcade.color.BLACK + (200,))
 
-        arcade.draw_text("PAUSED", constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2+50,
+        arcade.draw_text("PAUSED", self.window.width/2, self.window.height/2+50,
                          arcade.color.WHITE, font_size=50, anchor_x="center")
 
         # Show tip to return or reset
         arcade.draw_text("Press Esc. to return",
-                         constants.SCREEN_WIDTH/2,
-                         constants.SCREEN_HEIGHT/2,
+                         self.window.width/2,
+                         self.window.height/2,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
         arcade.draw_text("Press Enter to view instructions",
-                         constants.SCREEN_WIDTH/2,
-                         constants.SCREEN_HEIGHT/2-30,
+                         self.window.width/2,
+                         self.window.height/2-30,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")

@@ -26,7 +26,7 @@ class PlayerSprite(arcade.Sprite):
         drag (integer): holds the drag on the character's movement.
         respawning (boolean): determines whether or not to respawn the character.
     """
-    def __init__(self, filename, SCALE):
+    def __init__(self, filename, SCALE, width, height):
         """The class constructor.
         
         Args:
@@ -44,6 +44,8 @@ class PlayerSprite(arcade.Sprite):
         self.max_speed = 4
         self.drag = 0 
         self.respawning = False
+        self.screen_width = width
+        self.screen_height = height
 
         # Mark that we are respawning.
         self.respawn()
@@ -59,8 +61,8 @@ class PlayerSprite(arcade.Sprite):
         """
         # If we are in the middle of respawning, this is non-zero.
         self.respawning = True
-        self.center_x = constants.SCREEN_WIDTH / 2
-        self.center_y = constants.SCREEN_HEIGHT / 2
+        self.center_x = self.screen_width / 2
+        self.center_y = self.screen_height / 2
         self.angle = 0
 
     def update(self):
@@ -86,15 +88,15 @@ class PlayerSprite(arcade.Sprite):
 
         # If the player goes off-screen, move it to the other side of the window
         if self.right < 0:
-            self.left = constants.SCREEN_WIDTH
+            self.left = self.screen_width
 
-        if self.left > constants.SCREEN_WIDTH:
+        if self.left > self.screen_width:
             self.right = 0
 
         if self.bottom < 0:
-            self.top = constants.SCREEN_HEIGHT
+            self.top = self.screen_height
 
-        if self.top > constants.SCREEN_HEIGHT:
+        if self.top > self.screen_height:
             self.bottom = 0
 
         """ Call the parent class. """
