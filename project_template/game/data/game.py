@@ -99,6 +99,8 @@ class Game(arcade.View):
         self.current_song_index = 0
         self.current_player = None
         self.music = None
+        # self.song = constants.assets_dir / "sounds" / "02 Kokiri.mp3"
+        self.song = constants.assets_dir / "sounds" / "25_Battle of Stoicism.mp3"
         
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
@@ -115,10 +117,10 @@ class Game(arcade.View):
         time.sleep(0.3)
 
     def on_setup(self):
-        self.song1 = constants.assets_dir / "sounds" / "02 Kokiri.mp3"
-        self.music_list = [self.song1]
+        self.music_list = [self.song]
         self.current_song_index = 0
         self.play_song()
+
 
     def start_new_game(self):
         """ Begins the sequence of play.
@@ -353,7 +355,6 @@ class Game(arcade.View):
                 food.change_y -= self.move_time
 
             counter += 1
-
 
         # You win if you last for n minutes
         n = 1
