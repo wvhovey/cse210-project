@@ -155,6 +155,10 @@ class Game(arcade.View):
         # Make the unhealthy foods
         if self.window.width > 1300 and self.window.height > 1000:
             starting_food_count = constants.STARTING_food_COUNT * 2
+        elif self.window.width > 2000 and self.window.height > 2000:
+            starting_food_count = constants.STARTING_food_COUNT * 3
+        else:
+            starting_food_count = constants.STARTING_food_COUNT
         self.create_unhealthy_food(starting_food_count)
 
         # Make the healthy foods
