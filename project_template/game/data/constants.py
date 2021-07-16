@@ -5,9 +5,8 @@ for all files within this program
 
 """
 from pathlib import Path
-root = Path(__file__).parent
+root = Path(__file__).parent.resolve()
 assets_dir = root / "assets"  
-# print("fasklfdjsflksjdlkjfksj")
 # print(assets_dir)
 starting_food_count = 10
 scale = 0.5
