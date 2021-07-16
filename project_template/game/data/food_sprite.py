@@ -1,8 +1,8 @@
-""" -- Food Sprite File --
+""" -- food sprite file --
 
-Class: Food_Sprite()
+class: food_sprite()
 
-Functions:  __init__()
+functions:  __init__()
             update()
 """
 from data import constants
@@ -10,26 +10,26 @@ import arcade
 
 
 
-class FoodSprite(arcade.Sprite):
-    """ This class creates the movement of the food sprites and plays a sound on collision.
+class foodsprite(arcade.Sprite):
+    """ this class creates the movement of the food sprites and plays a sound on collision.
     
-    Stereotype:
-        Information Holder
+    stereotype:
+        information holder
 
-    Attributes:
+    attributes:
         size (integer): holds the size of each food sprite.
         type_of_food (string): holds the type of food (good or bad).
     """
 
-    def __init__(self, image_file_name, SCALE, width, height, good_bad = 'bad'):
-        """The class constructor.
+    def __init__(self, image_file_name, scale, width, height, good_bad = 'bad'):
+        """the class constructor.
         
-        Args:
-            self (FoodSprite): an instance of FoodSprite.
-            image_file_name (Constants): holds the image file for each instance of food sprites.
+        args:
+            self (foodsprite): an instance of foodsprite.
+            image_file_name (constants): holds the image file for each instance of food sprites.
             good_bad (string): holds value of type_of_food.
         """        
-        super().__init__(image_file_name, constants.SCALE)
+        super().__init__(image_file_name, constants.scale)
         self.size = 0
         self.type_of_food = good_bad
         if self.type_of_food == 'bad':
@@ -40,17 +40,17 @@ class FoodSprite(arcade.Sprite):
         self.screen_height = height
 
     def update(self):
-        """ Moves the food around in different directions.
+        """ moves the food around in different directions.
         
-        Args:
-            self (FoodSprite): an instance of FoodSprite.
+        args:
+            self (foodsprite): an instance of foodsprite.
         """  
         super().update()
-        if self.center_x < constants.LEFT_LIMIT:
-            self.center_x = self.screen_width + constants.OFFSCREEN_SPACE
-        if self.center_x > self.screen_width + constants.OFFSCREEN_SPACE:
-            self.center_x = constants.LEFT_LIMIT
-        if self.center_y > self.screen_height + constants.OFFSCREEN_SPACE:
-            self.center_y = constants.BOTTOM_LIMIT
-        if self.center_y < constants.BOTTOM_LIMIT:
-            self.center_y = self.screen_height + constants.OFFSCREEN_SPACE
+        if self.center_x < constants.left_limit:
+            self.center_x = self.screen_width + constants.offscreen_space
+        if self.center_x > self.screen_width + constants.offscreen_space:
+            self.center_x = constants.left_limit
+        if self.center_y > self.screen_height + constants.offscreen_space:
+            self.center_y = constants.bottom_limit
+        if self.center_y < constants.bottom_limit:
+            self.center_y = self.screen_height + constants.offscreen_space

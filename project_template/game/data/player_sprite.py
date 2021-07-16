@@ -1,8 +1,8 @@
-""" -- Player Sprite File --
+""" -- player sprite file --
 
-Class: Player_Sprite()
+class: player_sprite()
 
-Functions:  __init__()
+functions:  __init__()
             respawn()
             update()
             setup()
@@ -12,34 +12,34 @@ from data import constants
 import arcade
 import math
 
-class PlayerSprite(arcade.Sprite):
+class playersprite(arcade.Sprite):
 
-    """ This class is in charge of the user's character. Its appearance, movement, behavior,
+    """ this class is in charge of the user's character. its appearance, movement, behavior,
         and respawn on collision.
 
-    Stereotype: 
-        Service Provider
+    stereotype: 
+        service provider
 
-    Attributes:
-        speed (integer): Holds the speed of character's movement.
+    attributes:
+        speed (integer): holds the speed of character's movement.
         max_speed (integer): sets the maximum speed the character can move.
         drag (integer): holds the drag on the character's movement.
         respawning (boolean): determines whether or not to respawn the character.
     """
-    def __init__(self, filename, SCALE, width, height):
-        """The class constructor.
+    def __init__(self, filename, scale, width, height):
+        """the class constructor.
         
-        Args:
-            self (PlayerSprite): An instance of PlayerSprite.
+        args:
+            self (playersprite): an instance of playersprite.
             filename (string): holds the filename of the character sprite.
-            SCALE (Constants): holds the scale of the character.
+            scale (constants): holds the scale of the character.
         """
 
-        # Call the parent Sprite constructor
-        super().__init__(filename, SCALE)
+        # call the parent sprite constructor
+        super().__init__(filename, scale)
 
-        # Info on where we are going.
-        # Angle comes in automatically from the parent class.
+        # info on where we are going.
+        # angle comes in automatically from the parent class.
         self.speed = 0
         self.max_speed = 4
         self.drag = 0 
@@ -47,19 +47,19 @@ class PlayerSprite(arcade.Sprite):
         self.screen_width = width
         self.screen_height = height
 
-        # Mark that we are respawning.
+        # mark that we are respawning.
         self.respawn()
 
     def respawn(self):
 
-        """ This function is called when a collision takes place. This changes the appearance of 
+        """ this function is called when a collision takes place. this changes the appearance of 
             the player and creates invisibility frames.
         
-        Args:
-            self (PlayerSprite): An instance of PlayerSprite.
+        args:
+            self (playersprite): an instance of playersprite.
 
         """
-        # If we are in the middle of respawning, this is non-zero.
+        # if we are in the middle of respawning, this is non-zero.
         self.respawning = True
         self.center_x = self.screen_width / 2
         self.center_y = self.screen_height / 2
@@ -67,14 +67,14 @@ class PlayerSprite(arcade.Sprite):
 
     def update(self):
 
-        """ This function updates the position of the player based on key presses. 
-            If the player goes off-screen, they are moved to the other side of 
+        """ this function updates the position of the player based on key presses. 
+            if the player goes off-screen, they are moved to the other side of 
             the window.
         
-        Args:
-            self (PlayerSprite): An instance of PlayerSprite.
+        args:
+            self (playersprite): an instance of playersprite.
         """
-        # Move player.
+        # move player.
 
         if self.respawning:
             self.respawning += 1
@@ -86,7 +86,7 @@ class PlayerSprite(arcade.Sprite):
         self.center_x += self.change_x
         self.center_y += self.change_y
 
-        # If the player goes off-screen, move it to the other side of the window
+        # if the player goes off-screen, move it to the other side of the window
         if self.right < 0:
             self.left = self.screen_width
 
@@ -99,5 +99,5 @@ class PlayerSprite(arcade.Sprite):
         if self.top > self.screen_height:
             self.bottom = 0
 
-        """ Call the parent class. """
+        """ call the parent class. """
         super().update()

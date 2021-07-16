@@ -1,8 +1,8 @@
-""" -- Instruction Menu File --
+""" -- instruction menu file --
 
-Class: Instruction_Menu()
+class: instruction_menu()
 
-Functions:  __init__()
+functions:  __init__()
             on_show()
             on_draw()
             on_key_press()
@@ -13,88 +13,88 @@ import arcade
 from arcade.gui import UIManager
 from data import constants
 
-class Instruction_Menu(arcade.View):
-    """ This class creates the Instruction menu when the player pushes a specified button.
+class instruction_menu(arcade.View):
+    """ this class creates the instruction menu when the player pushes a specified button.
     
-    Stereotype:
-        Information Holder
+    stereotype:
+        information holder
 
-    Attributes:
+    attributes:
         instruction_view (object): holds the information for the instruction view.
 
     """
 
     def __init__(self, pause_view):
-        """ The class constructor.
+        """ the class constructor.
         
-        Args:
-            self (Instruction_Menu): an instance of Instruction_Menu.
+        args:
+            self (instruction_menu): an instance of instruction_menu.
             pause_view (object): an instance of pause_view.
         """   
         super().__init__()
         self.instruction_view = pause_view
 
     def on_show(self):
-        """ Sets the background color of the instruction menu.
+        """ sets the background color of the instruction menu.
         
-        Args:
-            self (Instruction_Menu): an instance of Instruction_Menu.
+        args:
+            self (instruction_menu): an instance of instruction_menu.
         """   
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
-        """ Creates the view for the instruction menu.
+        """ creates the view for the instruction menu.
         
-        Args:
-            self (Instruction_Menu): an instance of Instruction_Menu.
+        args:
+            self (instruction_menu): an instance of instruction_menu.
         """  
         arcade.start_render()
 
-        arcade.draw_text("INSTRUCTIONS", self.window.width/2, self.window.height/2+140,
+        arcade.draw_text("instructions", self.window.width/2, self.window.height/2+140,
                          arcade.color.WHITE, font_size=50, anchor_x="center")
-        arcade.draw_text("Press Esc. to return",
+        arcade.draw_text("press esc. to return",
                          self.window.width/2,
                          self.window.height/2+90,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("The goal of the game is to not die from being obese or underweight",
+        arcade.draw_text("the goal of the game is to not die from being obese or underweight",
                          self.window.width/2,
                          self.window.height/2+30,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("To win, you must live for 1 minute. Watch the timer on the bottom left!",
+        arcade.draw_text("to win, you must live for 1 minute. watch the timer on the bottom left!",
                          self.window.width/2,
                          self.window.height/2-30,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Press W to move up, S to move down",
+        arcade.draw_text("press w to move up, s to move down",
                          self.window.width/2,
                          self.window.height/2-60,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Press A to move left, D to move right",
+        arcade.draw_text("press a to move left, d to move right",
                          self.window.width/2,
                          self.window.height/2-90,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Gather unhealthy foods to increase your weight",
+        arcade.draw_text("gather unhealthy foods to increase your weight",
                          self.window.width/2,
                          self.window.height/2-120,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Gather healthy foods to decrease your weight",
+        arcade.draw_text("gather healthy foods to decrease your weight",
                          self.window.width/2,
                          self.window.height/2-150,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Don't go below 100 weight or above 400 weight or you will lose",
+        arcade.draw_text("don't go below 100 weight or above 400 weight or you will lose",
                          self.window.width/2,
                          self.window.height/2-180,
                          arcade.color.WHITE,
@@ -102,10 +102,10 @@ class Instruction_Menu(arcade.View):
                          anchor_x="center")
     
     def on_key_press(self, key, _modifiers):
-        """ Allows the user to resume the game on key press.
+        """ allows the user to resume the game on key press.
         
-        Args:
-            self (Instruction_Menu): an instance of Instruction_Menu.
+        args:
+            self (instruction_menu): an instance of instruction_menu.
             key (arcade.key): sets esc key to resume the game.
         """ 
         if key == arcade.key.ESCAPE:   # resume game
