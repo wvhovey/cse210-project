@@ -1,8 +1,8 @@
-""" -- Start Menu File --
+""" -- start menu file --
 
-Class: Start_Menu()
+class: start_menu()
 
-Functions:  __init__()
+functions:  __init__()
             on_draw()
             on_show_view()
             setup()
@@ -13,37 +13,37 @@ Functions:  __init__()
 import random
 import arcade
 from arcade.gui import UIManager
-from data.game import Game
-from data.instruction_menu import Instruction_Menu
+from data.game import game
+from data.instruction_menu import instruction_menu
 from data import constants
 import time
 
-MUSIC_VOLUME = 0.5
+music_volume = 0.5
 
-class Start_Menu(arcade.View):
-    """ This class creates the Start menu when the program begins.
+class start_menu(arcade.View):
+    """ this class creates the start menu when the program begins.
 
-    Stereotype:
-        Information Holder
+    stereotype:
+        information holder
 
-    Attributes:
-        view (Null): holds the starting menu view.
+    attributes:
+        view (null): holds the starting menu view.
         ui_manager(UIManager): manages the ui and the starting menu buttons.
 
     """
 
     def __init__(self):
-        """ The class constructor.
+        """ the class constructor.
         
-        Args:
-            self (Start_Menu): an instance of Start_Menu.
+        args:
+            self (start_menu): an instance of start_menu.
         """ 
         super().__init__()
 
         self.ui_manager = UIManager()
         self.view = None
 
-        # Music
+        # music
         self.music_list = []
         self.current_song_index = 0
         self.current_player = None
@@ -51,52 +51,52 @@ class Start_Menu(arcade.View):
 
     def play_song(self):
 
-        """ Play the song. """
-        # Stop what is currently playing.
+        """ play the song. """
+        # stop what is currently playing.
         if self.music:
             self.music.stop(self.current_player)
 
         self.music = arcade.Sound(self.music_list[self.current_song_index], streaming=True)
-        self.current_player = self.music.play(MUSIC_VOLUME)
+        self.current_player = self.music.play(music_volume)
         time.sleep(0.3)
 
     def on_draw(self):
-        """ Renders the start menu with the correct ui.
+        """ renders the start menu with the correct ui.
         
-        Args:
-            self (Start_Menu): an instance of Start_Menu.
+        args:
+            self (start_menu): an instance of start_menu.
         """  
         arcade.start_render()
         self.ui_manager.on_draw()
 
     def on_show_view(self):
-        """ Sets the background color of the Start menu.
+        """ sets the background color of the start menu.
         
-        Args:
-            self (Start_Menu): an instance of Start_Menu.
+        args:
+            self (start_menu): an instance of start_menu.
         """  
         self.setup()
         arcade.set_background_color(arcade.color.BLACK)
 
     def setup(self):
-        """ Creates the view for the Start menu.
+        """ creates the view for the start menu.
         
-        Args:
-            self (Start_Menu): an instance of Start_Menu.
+        args:
+            self (start_menu): an instance of start_menu.
         """  
         self.ui_manager.purge_ui_elements()
 
-        # self.song1 = constants.assets_dir / "sounds" / "25_Battle of Stoicism.mp3"
-        self.song1 = constants.assets_dir / "sounds" / "068 - Slow and Steady.mp3"
+        # self.song1 = constants.assets_dir / "sounds" / "25_battle of stoicism.mp3"
+        self.song1 = constants.assets_dir / "sounds" / "068 - slow and steady.mp3"
         self.music_list = [self.song1]
         self.current_song_index = 0
         self.play_song()
 
-        # Makes variables to place the buttons
+        # makes variables to place the buttons
         y_slot = self.window.height // 3
         middle = self.window.width // 2
 
-        # Creates the textures and button interactions.
+        # creates the textures and button interactions.
         button_normal = arcade.load_texture(
             ':resources:gui_basic_assets/red_button_normal.png')
         hovered_texture = arcade.load_texture(
@@ -104,14 +104,14 @@ class Start_Menu(arcade.View):
         pressed_texture = arcade.load_texture(
             ':resources:gui_basic_assets/red_button_press.png')
 
-        # Creates the buttons.
+        # creates the buttons.
         self.button2 = arcade.gui.UIImageButton(
             center_x = middle,
             center_y = y_slot * 1,
             normal_texture = button_normal,
             hover_texture = hovered_texture,
             press_texture = pressed_texture,
-            text = 'New Game'
+            text = 'new game'
         )
         self.ui_manager.add_ui_element(self.button2)
 
@@ -121,7 +121,7 @@ class Start_Menu(arcade.View):
             normal_texture = button_normal,
             hover_texture = hovered_texture,
             press_texture = pressed_texture,
-            text = 'Instructions'
+            text = 'instructions'
         )
         self.ui_manager.add_ui_element(self.button1)
 
@@ -129,24 +129,24 @@ class Start_Menu(arcade.View):
         self.button2.on_click = self.on_button_click2
 
     def on_button_click1(self):
-        """ Allows the user to click a button to view the instruction menu.
+        """ allows the user to click a button to view the instruction menu.
         
-        Args:
-            self (Start_Menu): an instance of Start_Menu.
+        args:
+            self (start_menu): an instance of start_menu.
         """  
         self.music.stop(self.current_player)
         self.ui_manager.purge_ui_elements()
-        instruction = Instruction_Menu(self)
+        instruction = instruction_menu(self)
         self.window.show_view(instruction)
     
     def on_button_click2(self):
-        """ Allows the user to click a button to begin the game.
+        """ allows the user to click a button to begin the game.
         
-        Args:
-            self (Start_Menu): an instance of Start_Menu.
+        args:
+            self (start_menu): an instance of start_menu.
         """
         self.music.stop(self.current_player)
         self.ui_manager.purge_ui_elements()
-        game = Game()
-        game.start_new_game()
-        self.window.show_view(game)
+        game2 = game()
+        game2.start_new_game()
+        self.window.show_view(game2)

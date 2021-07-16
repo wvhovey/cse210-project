@@ -1,22 +1,21 @@
-""" -- Constants File --
+""" -- constants file --
 
-Declares constant variables globally
+declares constant variables globally
 for all files within this program
 
 """
 from pathlib import Path
-root = Path(__file__).parent
+root = Path(__file__).parent.resolve()
 assets_dir = root / "assets"  
-# print("fasklfdjsflksjdlkjfksj")
 # print(assets_dir)
-STARTING_food_COUNT = 10
-SCALE = 0.5
-OFFSCREEN_SPACE = 10
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Food Smasher"
-LEFT_LIMIT = -OFFSCREEN_SPACE
-RIGHT_LIMIT = SCREEN_WIDTH + OFFSCREEN_SPACE
-BOTTOM_LIMIT = -OFFSCREEN_SPACE
-TOP_LIMIT = SCREEN_HEIGHT + OFFSCREEN_SPACE
-MOVEMENT_SPEED = 5
+starting_food_count = 10
+scale = 0.5
+offscreen_space = 10
+screen_width = 800
+screen_height = 600
+screen_title = "food smasher"
+left_limit = -offscreen_space
+right_limit = screen_width + offscreen_space
+bottom_limit = -offscreen_space
+top_limit = screen_height + offscreen_space
+movement_speed = 5

@@ -1,26 +1,26 @@
-""" -- Main File --
+""" -- main file --
 
-Class: n/a
+class: n/a
 
-Methods: main()
+methods: main()
 
 """
 
 from data import constants
 from data.game import arcade
-from data.start_menu import Start_Menu
+from data.start_menu import start_menu
 
 def main():
-    """ The main function: compiles all code and runs the program. 
+    """ the main function: compiles all code and runs the program. 
 
-    Args: none.
+    args: none.
     """
-    window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE, fullscreen=True)
+    window = arcade.Window(constants.screen_width, constants.screen_height, constants.screen_title, fullscreen=True)
     width, height = window.get_size()
 
     window.set_viewport(0, width, 0, height)
 
-    start_view = Start_Menu()
+    start_view = start_menu()
     window.show_view(start_view)
     arcade.run()
 

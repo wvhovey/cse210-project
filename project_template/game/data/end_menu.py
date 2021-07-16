@@ -1,8 +1,8 @@
-""" -- End Menu File --
+""" -- end menu file --
 
-Class: Instruction_Menu()
+class: instruction_menu()
 
-Functions:  __init__()
+functions:  __init__()
             on_show()
             on_draw()
             on_key_press()
@@ -15,28 +15,28 @@ from arcade.gui import UIManager
 from data import constants
 import time
 
-MUSIC_VOLUME = 0.3
+music_volume = 0.3
 
-class End_Menu(arcade.View):
-    """ This class creates the End menu when an end condition is met or the player ends the game.
+class end_menu(arcade.View):
+    """ this class creates the end menu when an end condition is met or the player ends the game.
     
-    Stereotype:
-        Information Holder
+    stereotype:
+        information holder
 
-    Attributes:
+    attributes:
         game_view (object): holds the information for the current game view.
 
     """
     def __init__(self, game_view):
-        """ The class constructor.
+        """ the class constructor.
         
-        Args:
-            self (End_Menu): an instance of End_Menu.
+        args:
+            self (end_menu): an instance of end_menu.
             game_view (object): an instance of game_view.
         """        
         super().__init__()
         self.game_view = game_view
-        # Music
+        # music
         self.music_list = []
         self.current_song_index = 0
         self.current_player = None
@@ -44,49 +44,49 @@ class End_Menu(arcade.View):
 
     def play_song(self):
 
-        """ Play the song. """
-        # Stop what is currently playing.
+        """ play the song. """
+        # stop what is currently playing.
         if self.music:
             self.music.stop(self.current_player)
 
         self.music = arcade.Sound(self.music_list[self.current_song_index], streaming=True)
-        self.current_player = self.music.play(MUSIC_VOLUME)
+        self.current_player = self.music.play(music_volume)
         time.sleep(0.3)
 
     def on_show(self):
-        """ Sets the background color of the end menu.
+        """ sets the background color of the end menu.
         
-        Args:
-            self (End_Menu): an instance of End_Menu.
+        args:
+            self (end_menu): an instance of end_menu.
         """
         self.setup()
         arcade.set_background_color(arcade.color.BLACK)
 
     def setup(self):
-        self.song1 = constants.assets_dir / "sounds" / "20_In Sorrow.mp3"
+        self.song1 = constants.assets_dir / "sounds" / "20_in sorrow.mp3"
         self.music_list = [self.song1]
         self.current_song_index = 0
         self.play_song()
 
     def on_draw(self):
-        """ Creates the view for the end menu.
+        """ creates the view for the end menu.
         
-        Args:
-            self (End_Menu): an instance of End_Menu.
+        args:
+            self (end_menu): an instance of end_menu.
         """    
         arcade.start_render()
 
-        arcade.draw_text("GAME OVER", self.window.width/2, self.window.height/2+50,
+        arcade.draw_text("game over", self.window.width/2, self.window.height/2+50,
                          arcade.color.WHITE, font_size=50, anchor_x="center")
 
-        # Show tip to return or reset
-        arcade.draw_text("Press Esc. to quit",
+        # show tip to return or reset
+        arcade.draw_text("press esc. to quit",
                          self.window.width/2,
                          self.window.height/2,
                          arcade.color.WHITE,
                          font_size=20,
                          anchor_x="center")
-        arcade.draw_text("Press Enter to restart the game",
+        arcade.draw_text("press enter to restart the game",
                          self.window.width/2,
                          self.window.height/2-30,
                          arcade.color.WHITE,
@@ -94,10 +94,10 @@ class End_Menu(arcade.View):
                          anchor_x="center")
 
     def on_key_press(self, key, _modifiers):
-        """ Allows the user to end or resume the game on key press.
+        """ allows the user to end or resume the game on key press.
         
-        Args:
-            self (End_Menu): an instance of End_Menu.
+        args:
+            self (end_menu): an instance of end_menu.
             key (arcade.key): sets the keys to end or resume the game.
         """  
         if key == arcade.key.ESCAPE:   # end game
